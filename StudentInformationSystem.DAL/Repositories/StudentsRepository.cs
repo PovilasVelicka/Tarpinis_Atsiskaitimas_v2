@@ -12,8 +12,9 @@ namespace StudentInformationSystem.DAL.Repositories
             _context = new StudentInfoSystemDbContext();
         }
 
-        public void AddOrUpdate(IStudentEntity student)
+        public void AddOrUpdate(IStudentEntity entity)
         {
+            var student = (Student)entity;
             _context.Students.Update(student);
             _context.SaveChanges();
         }
