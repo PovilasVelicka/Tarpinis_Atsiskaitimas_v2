@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentInformationSystem.CL.Interfaces
+﻿namespace StudentInformationSystem.CL.Interfaces
 {
-    public interface IStudentRepository
+    public interface IStudentRepository : IDisposable
     {
         IStudentEntity GetById(int id);
         IStudentEntity? GetByPersonalCode(string personalCode);
@@ -14,6 +8,6 @@ namespace StudentInformationSystem.CL.Interfaces
         IQueryable<IStudentEntity> GetAllByFirstName(string firstName);
         IQueryable<IStudentEntity> GetAllByLastName(string lastName);
         void AddOrUpdate(IStudentEntity student);
-        void Remove(IStudentEntity student);   
+        void Remove(IStudentEntity student);
     }
 }
