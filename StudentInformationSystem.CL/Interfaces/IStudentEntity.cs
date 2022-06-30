@@ -14,8 +14,8 @@ namespace StudentInformationSystem.CL.Interfaces
         public string PersonalCode { get; set; }
 
 
-        List<ILectureEntity> Lectures { get; set; }
-        IDepartmentEntity Department { get; set; }
+     //   List<ILectureEntity> Lectures { get; set; }
+     //   IDepartmentEntity Department { get; set; }
 
     }
 }

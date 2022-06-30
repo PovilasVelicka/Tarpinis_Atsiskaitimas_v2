@@ -14,8 +14,8 @@ namespace StudentInformationSystem.DAL.Models
         public string PersonalCode { get; set; } = null!;
 
 
-        public List<ILectureEntity> Lectures { get; set; } = null!;
-        public IDepartmentEntity Department { get; set; } = null!;
+         public List<Lecture> Lectures { get; set; } = null!;
+        public Department Department { get; set; } = null!;
 
         private Student() { }
 
@@ -24,7 +24,7 @@ namespace StudentInformationSystem.DAL.Models
             FirstName = firstName;
             LastName = lastName;
             PersonalCode = personalCode;
-            Lectures = new List<ILectureEntity>();
+            Lectures = new List<Lecture>();
         }
     }
 }

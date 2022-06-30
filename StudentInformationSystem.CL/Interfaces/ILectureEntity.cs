@@ -11,6 +11,6 @@ namespace StudentInformationSystem.CL.Interfaces
         public int Id { get; set; }
         public string Name { get; set; }
         
-        List<IDepartmentEntity> Departments { get; set; }
+        // List<IDepartmentEntity> Departments { get; set; }
     }
 }
