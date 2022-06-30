@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentInformationSystem.CL", "StudentInformationSystem.CL\StudentInformationSystem.CL.csproj", "{05721AC7-4325-4A45-ADAC-E27BA80CAC7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentInformationSystem.DAL", "StudentInformationSystem.DAL\StudentInformationSystem.DAL.csproj", "{3EACC91E-DDEF-4AB5-AD71-719C98F2F17F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{05721AC7-4325-4A45-ADAC-E27BA80CAC7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05721AC7-4325-4A45-ADAC-E27BA80CAC7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05721AC7-4325-4A45-ADAC-E27BA80CAC7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EACC91E-DDEF-4AB5-AD71-719C98F2F17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EACC91E-DDEF-4AB5-AD71-719C98F2F17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EACC91E-DDEF-4AB5-AD71-719C98F2F17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EACC91E-DDEF-4AB5-AD71-719C98F2F17F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
