@@ -1,5 +1,6 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
 using StudentInformationSystem.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 namespace StudentInformationSystem.DAL.Repositories
 {
     internal class DepartmentsRepository : IDepartmentRepository
@@ -25,7 +26,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IQueryable<IDepartmentEntity> GetAll()
         {
-            return _context.Departments;
+            return _context.Departments.AsNoTracking();
         }
 
         public IQueryable<IDepartmentEntity> GetAllByCity(string city)
@@ -40,7 +41,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IDepartmentEntity GetById(int id)
         {
-            return _context.Departments.Single(i => i.Id == id);
+            return _context.Departments.AsNoTracking().Single(i => i.Id == id);
         }
 
         #region Dispose methods

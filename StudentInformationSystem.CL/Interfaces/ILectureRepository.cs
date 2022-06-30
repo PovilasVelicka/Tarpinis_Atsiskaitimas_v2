@@ -4,6 +4,7 @@
     {
         ILectureEntity GetById(int id);
         IQueryable<ILectureEntity> GetByNameSubstring(string nameSubstring);
+        IQueryable<ILectureEntity> GetAll();
         void AddOrUpdate(ILectureEntity entity);
         void Remove(ILectureEntity entity);
 

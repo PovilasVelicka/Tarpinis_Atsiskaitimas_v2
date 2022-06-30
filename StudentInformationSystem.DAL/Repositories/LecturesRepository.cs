@@ -1,5 +1,6 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
 using StudentInformationSystem.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 namespace StudentInformationSystem.DAL.Repositories
 {
     internal class LecturesRepository : ILectureRepository
@@ -27,14 +28,18 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public ILectureEntity GetById(int id)
         {
-            return _context.Lectures.Single(i => i.Id == id);
+            return _context.Lectures.AsNoTracking().Single(i => i.Id == id);
         }
 
         public IQueryable<ILectureEntity> GetByNameSubstring(string name)
         {
-            return _context.Lectures.Where(n => n.Name.ToLower().Contains(name.ToLower()));
+            return GetAll().Where(n => n.Name.ToLower().Contains(name.ToLower()));
         }
 
+        public IQueryable<ILectureEntity> GetAll()
+        {
+            return _context.Lectures.AsNoTracking();
+        }
         #region Dispose methods
         private bool disposed = false;
 
@@ -56,6 +61,7 @@ namespace StudentInformationSystem.DAL.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         #endregion
     }
 }
