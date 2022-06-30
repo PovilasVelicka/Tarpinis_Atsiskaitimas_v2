@@ -1,6 +1,6 @@
-﻿using StudentInformationSystem.CL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.CL.Interfaces;
 using StudentInformationSystem.DAL.Models;
-using Microsoft.EntityFrameworkCore;
 namespace StudentInformationSystem.DAL.Repositories
 {
     internal class DepartmentsRepository : IDepartmentRepository

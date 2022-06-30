@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StudentInformationSystem.CL.Interfaces;
+﻿using StudentInformationSystem.CL.Interfaces;
 namespace StudentInformationSystem.DAL.Models
 {
     internal class Student : IStudentEntity
@@ -14,7 +9,7 @@ namespace StudentInformationSystem.DAL.Models
         public string PersonalCode { get; set; } = null!;
 
 
-         public List<ILectureEntity> Lectures { get; set; } = null!;
+        public List<ILectureEntity> Lectures { get; set; } = null!;
         public IDepartmentEntity Department { get; set; } = null!;
 
         private Student() { }

@@ -1,5 +1,4 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace StudentInformationSystem.BLL.Models
 {
@@ -18,7 +17,7 @@ namespace StudentInformationSystem.BLL.Models
             if (!department.Lecture.Where(l => l.Id == lecture.Id).Any())
             {
                 department.Lecture.Add(lecture);
-                
+
             }
         }
 
