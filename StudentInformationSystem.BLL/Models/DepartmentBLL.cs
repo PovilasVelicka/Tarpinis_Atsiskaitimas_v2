@@ -77,7 +77,7 @@ namespace StudentInformationSystem.BLL.Models
 
         public List<IDepartmentEntity> GetByName(string name)
         {
-            return GetByCity(name).ToList();
+            return _repository.GetAllByNameSubstring(name).ToList();
         }
 
         public void UpdateDepartment(int departmentId, string name, string city)
