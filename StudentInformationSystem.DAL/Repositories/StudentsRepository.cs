@@ -15,6 +15,22 @@ namespace StudentInformationSystem.DAL.Repositories
         public void AddOrUpdate(IStudentEntity entity)
         {
             var student = (Student)entity;
+            //switch (_context.Entry(student).State)
+            //{
+            //    case EntityState.Detached:
+            //        _context.Students.Update(student);
+
+            //        break;
+            //    case EntityState.Unchanged:
+            //        _context.Students.Append(student);
+            //        break;
+            //    case EntityState.Modified:
+            //        _context.Students.Update(student);
+            //        break;
+            //    case EntityState.Added:
+            //        _context.Students.Add(student);
+            //        break;
+            //}
             _context.Students.Update(student);
             _context.SaveChanges();
         }
@@ -43,7 +59,11 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IStudentEntity GetById(int id)
         {
-            return _context.Students.AsNoTracking().Include(x=> x.Lectures).Single(i => i.Id == id);
+            return _context
+                .Students
+                .Include(x=> x.Lectures)
+                .Include(d=>d.Department)
+                .Single(i => i.Id == id);
         }
 
         public IStudentEntity? GetByPersonalCode(string personalCode)

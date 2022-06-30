@@ -3,15 +3,6 @@
 var service = new InvormationService();
 Defaults(true);
 
-service.Departments.CreateDepartment("CodeAcademy Klaipedos filialas", "Klaipeda");
-var department = service.Departments.GetByName("CodeAcademy Klaipedos filialas").First();
-
-service.Lectures.CreateLectrue("Dapper");
-var lecture = service.Lectures.GetByName("Dapper").First();
-
-service.Departments.AddLecture(department.Id, lecture);
-
-service.Students.CreateStudent("Povilas", "Velicka", "37501050000", department);
 
 
 void Defaults(bool create)
@@ -39,14 +30,14 @@ void AddStudents()
 {
     for (int i = 0; i < 10; i++)
     {
-        var availableDepartments = service.Departments.GetByName(GetRandomCity());
+        var availableDepartments = service.Departments.GetByCity(GetRandomCity());
         foreach (var depo in availableDepartments)
         {
             service.Students.CreateStudent(
                 firstName: $"Vardenis {new Random().Next(1000)}",
                 lastName: $"Pavardenis {new Random().Next(1000)}",
-                personalCode: DateTime.Now.ToString("yyyyMMddhh0"),
-                department: depo);
+                personalCode: GetRandomPersonalCode(),
+                departmentId: depo.Id);
         }
     }
 }
@@ -55,11 +46,12 @@ void AddLectures()
 {
     for (int i = 0; i < 10; i++)
     {
-        var availableDepartments = service.Departments.GetByName(GetRandomCity());
+        var availableDepartments = service.Departments.GetByCity(GetRandomCity());
         foreach (var depo in availableDepartments)
         {
-            service.Lectures.CreateLectrue(
-                $"Paskaita {DateTime.Now.AddDays(new Random().Next(0, 30)).ToShortDateString()} dienos;");
+            var lectureName = $"Paskaita {DateTime.Now.AddDays(new Random().Next(0, 30)).ToShortDateString()} dienos";
+            var lecture = service.Lectures.CreateLectrue(lectureName);           
+            service.Departments.AddLecture(depo.Id, lecture);
         }
     }
 }
@@ -69,11 +61,13 @@ void AddLecturesToStudents()
     var students = service.Students.GetStudentByFirstName("VarDen");
     foreach (var student in students)
     {
-         service.Students.AddLecturesFromDepartment(student.Id,student.)
+        var depo = service.Departments.GetById(student.DepartmentId);
+        service.Students.AddLecturesFromDepartment(student.Id, depo);
     }
 
     
 }
+
 string GetRandomCity()
 {
     string[] cities = new string[]
@@ -85,4 +79,14 @@ string GetRandomCity()
     };
 
     return cities[new Random().Next(0, cities.Count())];
+}
+
+string GetRandomPersonalCode()
+{
+    return 
+        $"{new Random().Next(3,10)}" +
+        $"{new Random().Next(50,99)}" +
+        $"{new Random().Next(1,13)}" +
+        $"{new Random().Next(1,28)}" +
+        $"{new Random().Next (0,9999).ToString("0000")}";
 }

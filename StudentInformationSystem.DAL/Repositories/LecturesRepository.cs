@@ -15,7 +15,10 @@ namespace StudentInformationSystem.DAL.Repositories
         public void AddOrUpdate(ILectureEntity entity)
         {
             var lecture = (Lecture)entity;
-            _context.Lectures.Update(lecture);
+            if(lecture.Id == 0)
+                _context.Lectures.Add(lecture);
+            else
+                _context.Lectures.Update(lecture);
             _context.SaveChanges();
         }
 
@@ -32,7 +35,6 @@ namespace StudentInformationSystem.DAL.Repositories
                 .Lectures
                 .Include(x=>x.Departments)
                 .Include(s=>s.Students)
-                .AsNoTracking()
                 .Single(i => i.Id == id);
         }
 
@@ -43,7 +45,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IQueryable<ILectureEntity> GetAll()
         {
-            return _context.Lectures.AsNoTracking();
+            return _context.Lectures;//.AsNoTracking();
         }
         #region Dispose methods
         private bool disposed = false;

@@ -11,12 +11,13 @@ namespace StudentInformationSystem.BLL.Models
             _repository = repository;
         }
 
-        public bool CreateStudent(string firstName, string lastName, string personalCode, IDepartmentEntity department)
+        public bool CreateStudent(string firstName, string lastName, string personalCode, int departmentId)
         {
             var studentExists = _repository.GetByPersonalCode(personalCode) != null;
             if (!studentExists)
             {
-                var student = new Student(firstName, lastName, personalCode, (Department)department);
+                var student = new Student(firstName, lastName, personalCode, departmentId);
+
                 _repository.AddOrUpdate(student);
                 return true;
             }

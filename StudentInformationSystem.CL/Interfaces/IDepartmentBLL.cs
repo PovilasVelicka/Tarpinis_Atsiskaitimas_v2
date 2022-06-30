@@ -3,9 +3,10 @@
     public interface IDepartmentBLL
     {
         //  protected IDepartmentRepository DepartmentRepository { get; }
-        bool CreateDepartment(string name, string city);
+        IDepartmentEntity CreateDepartment(string name, string city);
         List<IDepartmentEntity> GetByName(string name);
         List<IDepartmentEntity> GetByCity(string city);
+        IDepartmentEntity GetById(int id);
         void AddStudents(int departmentId, List<IStudentEntity> students);
         void AddStudent(int departmentId, IStudentEntity student);
         void AddLectures(int departmentId, List<ILectureEntity> lectures);

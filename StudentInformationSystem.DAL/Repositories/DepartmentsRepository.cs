@@ -13,7 +13,28 @@ namespace StudentInformationSystem.DAL.Repositories
         public void AddOrUpdate(IDepartmentEntity entity)
         {
             var department = (Department)entity;
-            _context.Departments.Update(department);
+            //switch (_context.Entry(department).State)
+            //{
+            //    case EntityState.Detached:
+            //        _context.Departments.Update(department);
+            //        _context.Entry(entity).State = EntityState.Added;
+            //        break;
+            //    case EntityState.Unchanged:
+            //        _context.Departments.Append(department);
+            //        break;
+            //    case EntityState.Modified:
+            //        _context.Departments.Update(department);
+            //        break;
+            //    case EntityState.Added:
+            //        _context.Departments.Add(department);
+            //        break;
+            //}
+            //_context.Departments.Append(department);
+
+            if(department.Id==0)
+                _context.Departments.Add(department);
+            else
+                _context.Departments.Update(department);
             _context.SaveChanges();
         }
 
@@ -26,7 +47,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IQueryable<IDepartmentEntity> GetAll()
         {
-            return _context.Departments.AsNoTracking();
+            return _context.Departments;// .AsNoTracking();
         }
 
         public IQueryable<IDepartmentEntity> GetAllByCity(string city)
@@ -44,7 +65,7 @@ namespace StudentInformationSystem.DAL.Repositories
             return _context
                 .Departments
                 .Include(l=> l.Lecture )
-                .AsNoTracking()
+                .Include(l=>l.Students)
                 .Single(i => i.Id == id);
         }
 

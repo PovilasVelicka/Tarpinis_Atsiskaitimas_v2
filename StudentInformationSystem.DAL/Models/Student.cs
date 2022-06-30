@@ -15,9 +15,9 @@ namespace StudentInformationSystem.DAL.Models
 
         private Student() { }
 
-        public Student(string firstName, string lastName, string personalCode,Department department)
+        public Student(string firstName, string lastName, string personalCode,int departmentId)
         {
-            Department = department;
+            DepartmentId = departmentId;
             FirstName = firstName;
             LastName = lastName;
             PersonalCode = personalCode;

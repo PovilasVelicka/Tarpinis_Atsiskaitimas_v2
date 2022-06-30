@@ -11,15 +11,20 @@ namespace StudentInformationSystem.BLL.Models
             _repository = repository;
         }
 
-        public bool CreateLectrue(string name)
+        public ILectureEntity CreateLectrue(string name)
         {
-            var lectureExists = _repository.GetByNameSubstring(name).Any();
-            if (!lectureExists)
+            var id = _repository.GetByNameSubstring(name).FirstOrDefault()?.Id ?? 0;
+            ILectureEntity lecture;
+            if (id == 0)
+                lecture = new Lecture(name);
+            else
             {
-                _repository.AddOrUpdate(new Lecture(name));
-                return true;
+                lecture = _repository.GetById(id);
             }
-            return false;
+
+            _repository.AddOrUpdate(new Lecture(name));
+
+            return lecture;
         }
 
         public void DeleteLecture(int lectureId)

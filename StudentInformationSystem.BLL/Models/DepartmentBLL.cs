@@ -14,7 +14,7 @@ namespace StudentInformationSystem.BLL.Models
 
         public void AddLecture(int departmentId, ILectureEntity lecture)
         {
-            var department = (Department) _repository.GetById(departmentId);
+            var department = (Department)GetById(departmentId);
             if (!department.Lecture.Where(l => l.Id == lecture.Id).Any())
             {
                 department.Lecture.Add((Lecture)lecture);
@@ -32,8 +32,8 @@ namespace StudentInformationSystem.BLL.Models
 
         public void AddStudent(int departmentId, IStudentEntity student)
         {
-            var department = (Department)_repository.GetById(departmentId);
-            if (!department.Lecture.Where(l => l.Id == student.Id).Any())
+            var department = (Department)GetById(departmentId);
+            if (!department.Students.Where(l => l.Id == student.Id).Any())
             {
                 department.Students.Add((Student)student);
                 _repository.AddOrUpdate(department);
@@ -48,20 +48,23 @@ namespace StudentInformationSystem.BLL.Models
             }
         }
 
-        public bool CreateDepartment(string name, string city)
+        public IDepartmentEntity CreateDepartment(string name, string city)
         {
-            var depoExists =
+            var depoId =
                 _repository
                 .GetAll()
                 .Where(d => d.Name.ToLower() == name.ToLower() && d.City.ToLower() == city.ToLower())
-                .Any();
-
-            if (!depoExists)
-            {           
-                _repository.AddOrUpdate(new Department(name, city));
-                return true;
+                .FirstOrDefault()?.Id ?? 0;
+            IDepartmentEntity department;
+            if (depoId == 0)
+            {
+                department = new Department(name, city);
+                _repository.AddOrUpdate(department);
             }
-            return false;
+            else
+                department = GetById(depoId);
+
+            return department;
         }
 
         public void DeleteDepartment(int departmentId)
@@ -74,6 +77,11 @@ namespace StudentInformationSystem.BLL.Models
             return _repository.GetAllByCity(city).ToList();
         }
 
+        public IDepartmentEntity GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+
         public List<IDepartmentEntity> GetByName(string name)
         {
             return _repository.GetAllByNameSubstring(name).ToList();
@@ -81,7 +89,7 @@ namespace StudentInformationSystem.BLL.Models
 
         public void UpdateDepartment(int departmentId, string name, string city)
         {
-            var depo = _repository.GetById(departmentId);
+            var depo = (Department)GetById(departmentId);
             depo.Name = name;
             depo.City = city;
             _repository.AddOrUpdate(depo);
