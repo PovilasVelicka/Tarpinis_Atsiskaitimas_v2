@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentInformationSystem.CL.Interfaces
+﻿namespace StudentInformationSystem.CL.Interfaces
 {
     public interface IStudentEntity
     {
@@ -14,8 +8,8 @@ namespace StudentInformationSystem.CL.Interfaces
         public string PersonalCode { get; set; }
 
 
-     //   List<ILectureEntity> Lectures { get; set; }
-     //   IDepartmentEntity Department { get; set; }
+        List<ILectureEntity> Lectures { get; set; }
+        IDepartmentEntity Department { get; set; }
 
     }
 }
