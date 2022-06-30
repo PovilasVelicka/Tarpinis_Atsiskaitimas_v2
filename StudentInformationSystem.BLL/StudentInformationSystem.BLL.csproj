@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StudentInformationSystem.CL\StudentInformationSystem.CL.csproj" />
+    <ProjectReference Include="..\StudentInformationSystem.DAL\StudentInformationSystem.DAL.csproj" />
   </ItemGroup>
 
 </Project>

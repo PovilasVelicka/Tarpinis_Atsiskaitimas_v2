@@ -1,5 +1,5 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
-
+using StudentInformationSystem.DAL.Models;
 namespace StudentInformationSystem.BLL.Models
 {
     internal class StudentBLL : IStudentBLL
@@ -11,15 +11,12 @@ namespace StudentInformationSystem.BLL.Models
             _repository = repository;
         }
 
-        public bool CreateStudent(string firstName, string lastName, string personalCode)
+        public bool CreateStudent(string firstName, string lastName, string personalCode, IDepartmentEntity department)
         {
             var studentExists = _repository.GetByPersonalCode(personalCode) != null;
             if (!studentExists)
             {
-                var student = (IStudentEntity)new object();
-                student.FirstName = firstName;
-                student.LastName = lastName;
-                student.PersonalCode = personalCode;
+                var student = new Student(firstName, lastName, personalCode, (Department)department);
                 _repository.AddOrUpdate(student);
                 return true;
             }
@@ -49,9 +46,27 @@ namespace StudentInformationSystem.BLL.Models
 
         public void MoveToDepartment(int studentId, IDepartmentEntity department)
         {
-            var student = _repository.GetById(studentId);
-            student.Department = department;
+            var student = (Student)_repository.GetById(studentId);
+            var depo = (Department)department;
+            student.Department = depo;
+            student.Lectures.Clear();
+            AddLecturesFromDepartment(studentId, depo);
             _repository.AddOrUpdate(student);
+        }
+
+        public void AddLecturesFromDepartment(int studentId, IDepartmentEntity department)
+        {
+            var student = (Student)_repository.GetById(studentId);
+            var depo = (Department)department;
+            foreach (var lecture in depo.Lecture)
+            {
+                if (!student.Lectures.Where(x => x.Id == lecture.Id).Any())
+                {
+                    student.Lectures.Add(lecture);
+                }
+            }
+            _repository.AddOrUpdate(student);
+
         }
 
         public void UpdateStudent(int studentId, string firstName, string lastName, string personalCode)

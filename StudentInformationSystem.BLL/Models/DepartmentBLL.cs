@@ -1,4 +1,5 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
+using StudentInformationSystem.DAL.Models;
 
 namespace StudentInformationSystem.BLL.Models
 {
@@ -13,11 +14,11 @@ namespace StudentInformationSystem.BLL.Models
 
         public void AddLecture(int departmentId, ILectureEntity lecture)
         {
-            var department = _repository.GetById(departmentId);
+            var department = (Department) _repository.GetById(departmentId);
             if (!department.Lecture.Where(l => l.Id == lecture.Id).Any())
             {
-                department.Lecture.Add(lecture);
-
+                department.Lecture.Add((Lecture)lecture);
+                _repository.AddOrUpdate(department);
             }
         }
 
@@ -31,10 +32,11 @@ namespace StudentInformationSystem.BLL.Models
 
         public void AddStudent(int departmentId, IStudentEntity student)
         {
-            var department = _repository.GetById(departmentId);
+            var department = (Department)_repository.GetById(departmentId);
             if (!department.Lecture.Where(l => l.Id == student.Id).Any())
             {
-                department.Students.Add(student);
+                department.Students.Add((Student)student);
+                _repository.AddOrUpdate(department);
             }
         }
 
@@ -55,11 +57,8 @@ namespace StudentInformationSystem.BLL.Models
                 .Any();
 
             if (!depoExists)
-            {
-                var depoFromObject = (IDepartmentEntity)new object();
-                depoFromObject.Name = name;
-                depoFromObject.City = city;
-                _repository.AddOrUpdate(depoFromObject);
+            {           
+                _repository.AddOrUpdate(new Department(name, city));
                 return true;
             }
             return false;

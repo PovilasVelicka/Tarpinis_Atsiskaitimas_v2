@@ -1,6 +1,6 @@
 ﻿using StudentInformationSystem.BLL.Models;
 using StudentInformationSystem.CL.Interfaces;
-
+using StudentInformationSystem.DAL;
 namespace StudentInformationSystem.BLL
 {
     public class InvormationService
@@ -11,8 +11,8 @@ namespace StudentInformationSystem.BLL
         private readonly ILectureBLL _lectureBLL;
         public InvormationService()
         {
-            throw new NotImplementedException("Need implement UnitOfWork class");
-            _unitOfWork = (IUnitOfWork)new object();
+            //throw new NotImplementedException("Need implement UnitOfWork class");
+            _unitOfWork = new UnitOfWork();
             _lectureBLL = new LectureBLL(_unitOfWork.Lectures);
             _departmentBLL = new DepartmentBLL(_unitOfWork.Departments);
             _studentBLL = new StudentBLL(_unitOfWork.Students);
@@ -20,8 +20,8 @@ namespace StudentInformationSystem.BLL
 
 
         public IStudentBLL Students { get => _studentBLL; }
-        public IDepartmentBLL DepartmentBLL { get => _departmentBLL; }
-        public ILectureBLL lectureBLL { get => _lectureBLL; }
+        public IDepartmentBLL Departments { get => _departmentBLL; }
+        public ILectureBLL Lectures { get => _lectureBLL; }
 
     }
 }

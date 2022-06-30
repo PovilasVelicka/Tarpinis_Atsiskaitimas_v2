@@ -1,6 +1,6 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
 using StudentInformationSystem.DAL.Models;
-
+using Microsoft.EntityFrameworkCore;
 namespace StudentInformationSystem.DAL.Repositories
 {
     internal class StudentsRepository : IStudentRepository
@@ -43,7 +43,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IStudentEntity GetById(int id)
         {
-            return _context.Students.Single(i => i.Id == id);
+            return _context.Students.AsNoTracking().Include(x=> x.Lectures).Single(i => i.Id == id);
         }
 
         public IStudentEntity? GetByPersonalCode(string personalCode)

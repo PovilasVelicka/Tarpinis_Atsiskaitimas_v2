@@ -1,7 +1,7 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
 namespace StudentInformationSystem.DAL.Models
 {
-    internal class Student : IStudentEntity
+    public class Student : IStudentEntity
     {
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;
@@ -9,17 +9,18 @@ namespace StudentInformationSystem.DAL.Models
         public string PersonalCode { get; set; } = null!;
 
 
-        public List<ILectureEntity> Lectures { get; set; } = null!;
-        public IDepartmentEntity Department { get; set; } = null!;
+        public List<Lecture> Lectures { get; set; } = null!;
+        public Department Department { get; set; } = null!;
 
         private Student() { }
 
-        public Student(string firstName, string lastName, string personalCode)
+        public Student(string firstName, string lastName, string personalCode,Department department)
         {
+            Department = department;
             FirstName = firstName;
             LastName = lastName;
             PersonalCode = personalCode;
-            Lectures = new List<ILectureEntity>();
+            Lectures = new List<Lecture>();
         }
     }
 }

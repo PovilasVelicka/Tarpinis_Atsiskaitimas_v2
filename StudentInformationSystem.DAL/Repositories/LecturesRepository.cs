@@ -28,7 +28,12 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public ILectureEntity GetById(int id)
         {
-            return _context.Lectures.AsNoTracking().Single(i => i.Id == id);
+            return _context
+                .Lectures
+                .Include(x=>x.Departments)
+                .Include(s=>s.Students)
+                .AsNoTracking()
+                .Single(i => i.Id == id);
         }
 
         public IQueryable<ILectureEntity> GetByNameSubstring(string name)

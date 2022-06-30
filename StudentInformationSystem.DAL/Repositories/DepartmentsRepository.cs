@@ -41,7 +41,11 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IDepartmentEntity GetById(int id)
         {
-            return _context.Departments.AsNoTracking().Single(i => i.Id == id);
+            return _context
+                .Departments
+                .Include(l=> l.Lecture )
+                .AsNoTracking()
+                .Single(i => i.Id == id);
         }
 
         #region Dispose methods
@@ -66,7 +70,5 @@ namespace StudentInformationSystem.DAL.Repositories
             GC.SuppressFinalize(this);
         }
         #endregion
-
-
     }
 }

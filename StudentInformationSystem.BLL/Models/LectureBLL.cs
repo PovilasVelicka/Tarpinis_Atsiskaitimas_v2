@@ -1,5 +1,5 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
-
+using StudentInformationSystem.DAL.Models;
 namespace StudentInformationSystem.BLL.Models
 {
     internal class LectureBLL : ILectureBLL
@@ -16,9 +16,7 @@ namespace StudentInformationSystem.BLL.Models
             var lectureExists = _repository.GetByNameSubstring(name).Any();
             if (!lectureExists)
             {
-                var lecture = (ILectureEntity)new object();
-                lecture.Name = name;
-                _repository.AddOrUpdate(lecture);
+                _repository.AddOrUpdate(new Lecture(name));
                 return true;
             }
             return false;
