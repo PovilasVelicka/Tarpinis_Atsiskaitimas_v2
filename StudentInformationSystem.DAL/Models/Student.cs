@@ -14,15 +14,16 @@ namespace StudentInformationSystem.DAL.Models
         public int DepartmentId { get; set; }
         public Department Department { get; set; } = null!;
 
-        private Student() { }
+        private Student ( ) { }
 
-        public Student(string firstName, string lastName, string personalCode,int departmentId)
+        public Student (string firstName, string lastName, string personalCode, int departmentId)
         {
             DepartmentId = departmentId;
             FirstName = firstName;
             LastName = lastName;
             PersonalCode = personalCode;
-            Lectures = new List<Lecture>();
+            Lectures = new List<Lecture> ( );
         }
     }
 }
+

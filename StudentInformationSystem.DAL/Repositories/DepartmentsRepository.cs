@@ -5,47 +5,47 @@ namespace StudentInformationSystem.DAL.Repositories
 {
     internal class DepartmentsRepository : IDepartmentRepository
     {
-        readonly StudentInfoSystemDbContext _context;
-        public DepartmentsRepository(StudentInfoSystemDbContext context)
+        private readonly StudentInfoSystemDbContext _context;
+        public DepartmentsRepository (StudentInfoSystemDbContext context)
         {
             _context = context;
         }
-        public void AddOrUpdate(IDepartmentEntity entity)
+        public void AddOrUpdate (IDepartmentEntity entity)
         {
-            var state = _context.Entry(entity).State;
-            _context.Departments.Update((Department)entity);
-            _context.SaveChanges();
+            var state = _context.Entry (entity).State;
+            _context.Departments.Update ((Department)entity);
+            _context.SaveChanges ( );
         }
 
-        public void Remove(IDepartmentEntity entity)
+        public void Remove (IDepartmentEntity entity)
         {
             var department = (Department)entity;
-            _context.Departments.Remove(department);
-            _context.SaveChanges();
+            _context.Departments.Remove (department);
+            _context.SaveChanges ( );
         }
 
-        public IQueryable<IDepartmentEntity> GetAll()
+        public IQueryable<IDepartmentEntity> GetAll ( )
         {
-            return _context.Departments.AsNoTracking();
+            return _context.Departments.AsNoTracking ( );
         }
 
-        public IQueryable<IDepartmentEntity> GetAllByCity(string city)
+        public IQueryable<IDepartmentEntity> GetAllByCity (string city)
         {
-            return GetAll().Where(x => x.City.ToLower().Contains(city.ToLower()));
+            return GetAll ( ).Where (x => x.City.ToLower ( ).Contains (city.ToLower ( )));
         }
 
-        public IQueryable<IDepartmentEntity> GetAllByNameSubstring(string name)
+        public IQueryable<IDepartmentEntity> GetAllByNameSubstring (string name)
         {
-            return GetAll().Where(n => n.Name.ToLower().Contains(name.ToLower()));
+            return GetAll ( ).Where (n => n.Name.ToLower ( ).Contains (name.ToLower ( )));
         }
 
-        public IDepartmentEntity GetById(int id)
+        public IDepartmentEntity GetById (int id)
         {
             return _context
                 .Departments
-                .Include(l => l.Lecture)
-                .Include(l => l.Students)
-                .Single(i => i.Id == id);
+                .Include (l => l.Lecture)
+                .Include (l => l.Students)
+                .Single (i => i.Id == id);
         }
     }
 }

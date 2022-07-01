@@ -4,7 +4,7 @@
 
 namespace StudentInformationSystem.DAL.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class CreateDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,12 +14,25 @@ namespace StudentInformationSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(255)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Departments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lectures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(150)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lectures", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -28,10 +41,10 @@ namespace StudentInformationSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                    FirstName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    PersonalCode = table.Column<string>(type: "nvarchar(11)", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,26 +54,7 @@ namespace StudentInformationSystem.DAL.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Lectures",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lectures", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Lectures_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id");
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,15 +81,39 @@ namespace StudentInformationSystem.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LectureStudent",
+                columns: table => new
+                {
+                    LecturesId = table.Column<int>(type: "int", nullable: false),
+                    StudentsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LectureStudent", x => new { x.LecturesId, x.StudentsId });
+                    table.ForeignKey(
+                        name: "FK_LectureStudent_Lectures_LecturesId",
+                        column: x => x.LecturesId,
+                        principalTable: "Lectures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LectureStudent_Students_StudentsId",
+                        column: x => x.StudentsId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_DepartmentLecture_LectureId",
                 table: "DepartmentLecture",
                 column: "LectureId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lectures_StudentId",
-                table: "Lectures",
-                column: "StudentId");
+                name: "IX_LectureStudent_StudentsId",
+                table: "LectureStudent",
+                column: "StudentsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_DepartmentId",
@@ -107,6 +125,9 @@ namespace StudentInformationSystem.DAL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DepartmentLecture");
+
+            migrationBuilder.DropTable(
+                name: "LectureStudent");
 
             migrationBuilder.DropTable(
                 name: "Lectures");

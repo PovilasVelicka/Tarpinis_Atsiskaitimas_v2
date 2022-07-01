@@ -7,43 +7,43 @@ namespace StudentInformationSystem.DAL.Repositories
     {
         private readonly StudentInfoSystemDbContext _context;
 
-        public LecturesRepository(StudentInfoSystemDbContext context)
+        public LecturesRepository (StudentInfoSystemDbContext context)
         {
             _context = context;
         }
 
-        public void AddOrUpdate(ILectureEntity entity)
+        public void AddOrUpdate (ILectureEntity entity)
         {
             var lecture = (Lecture)entity;
 
-            _context.Lectures.Update(lecture);
-            _context.SaveChanges();
+            _context.Lectures.Update (lecture);
+            _context.SaveChanges ( );
         }
 
-        public void Remove(ILectureEntity entity)
+        public void Remove (ILectureEntity entity)
         {
             var lecture = (Lecture)entity;
-            _context.Lectures.Remove(lecture);
-            _context.SaveChanges();
+            _context.Lectures.Remove (lecture);
+            _context.SaveChanges ( );
         }
 
-        public ILectureEntity GetById(int id)
+        public ILectureEntity GetById (int id)
         {
             return _context
                 .Lectures
-                .Include(x => x.Departments)
-                .Include(s => s.Students)
-                .Single(i => i.Id == id);
+                .Include (x => x.Departments)
+                .Include (s => s.Students)
+                .Single (i => i.Id == id);
         }
 
-        public IQueryable<ILectureEntity> GetByNameSubstring(string name)
+        public IQueryable<ILectureEntity> GetByNameSubstring (string name)
         {
-            return GetAll().Where(n => n.Name.ToLower().Contains(name.ToLower()));
+            return GetAll ( ).Where (n => n.Name.ToLower ( ).Contains (name.ToLower ( )));
         }
 
-        public IQueryable<ILectureEntity> GetAll()
+        public IQueryable<ILectureEntity> GetAll ( )
         {
-            return _context.Lectures.AsNoTracking();
-        }        
+            return _context.Lectures.AsNoTracking ( );
+        }
     }
 }
