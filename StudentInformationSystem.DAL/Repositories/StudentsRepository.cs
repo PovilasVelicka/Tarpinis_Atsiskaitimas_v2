@@ -1,36 +1,26 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
 using StudentInformationSystem.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+
 namespace StudentInformationSystem.DAL.Repositories
 {
     internal class StudentsRepository : IStudentRepository
     {
         private readonly StudentInfoSystemDbContext _context;
 
-        public StudentsRepository()
+        public StudentsRepository(StudentInfoSystemDbContext context)
         {
-            _context = new StudentInfoSystemDbContext();
+            _context = context;
         }
-
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
         public void AddOrUpdate(IStudentEntity entity)
         {
             var student = (Student)entity;
-            //switch (_context.Entry(student).State)
-            //{
-            //    case EntityState.Detached:
-            //        _context.Students.Update(student);
-
-            //        break;
-            //    case EntityState.Unchanged:
-            //        _context.Students.Append(student);
-            //        break;
-            //    case EntityState.Modified:
-            //        _context.Students.Update(student);
-            //        break;
-            //    case EntityState.Added:
-            //        _context.Students.Add(student);
-            //        break;
-            //}
+        
             _context.Students.Update(student);
             _context.SaveChanges();
         }
@@ -44,7 +34,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IQueryable<IStudentEntity> GetAll()
         {
-            return _context.Students;
+            return _context.Students.AsNoTracking();
         }
 
         public IQueryable<IStudentEntity> GetAllByFirstName(string firstName)

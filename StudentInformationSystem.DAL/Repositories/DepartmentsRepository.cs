@@ -6,35 +6,20 @@ namespace StudentInformationSystem.DAL.Repositories
     internal class DepartmentsRepository : IDepartmentRepository
     {
         readonly StudentInfoSystemDbContext _context;
-        public DepartmentsRepository()
+        public DepartmentsRepository(StudentInfoSystemDbContext context)
         {
-            _context = new StudentInfoSystemDbContext();
+            _context = context;
         }
         public void AddOrUpdate(IDepartmentEntity entity)
         {
-            var department = (Department)entity;
-            //switch (_context.Entry(department).State)
-            //{
-            //    case EntityState.Detached:
-            //        _context.Departments.Update(department);
-            //        _context.Entry(entity).State = EntityState.Added;
-            //        break;
-            //    case EntityState.Unchanged:
-            //        _context.Departments.Append(department);
-            //        break;
-            //    case EntityState.Modified:
-            //        _context.Departments.Update(department);
-            //        break;
-            //    case EntityState.Added:
-            //        _context.Departments.Add(department);
-            //        break;
-            //}
-            //_context.Departments.Append(department);
+            var state = _context.Entry(entity).State;
+           
 
-            if(department.Id==0)
-                _context.Departments.Add(department);
+            if (entity.Id==0)
+                _context.Departments.Update((Department)entity);
             else
-                _context.Departments.Update(department);
+                _context.Departments.Update((Department)entity);
+         
             _context.SaveChanges();
         }
 
@@ -47,7 +32,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IQueryable<IDepartmentEntity> GetAll()
         {
-            return _context.Departments;// .AsNoTracking();
+            return _context.Departments.AsNoTracking();
         }
 
         public IQueryable<IDepartmentEntity> GetAllByCity(string city)

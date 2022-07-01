@@ -13,6 +13,7 @@ void Defaults(bool create)
         AddStudents();
         AddLectures();
         AddLecturesToStudents();
+        service.SaveChanges();
     }
 }
 
@@ -47,10 +48,12 @@ void AddLectures()
     for (int i = 0; i < 10; i++)
     {
         var availableDepartments = service.Departments.GetByCity(GetRandomCity());
-        foreach (var depo in availableDepartments)
+        var lectureName = $"Paskaita {DateTime.Now.AddDays(new Random().Next(0, 30)).ToShortDateString()} dienos";
+        
+        foreach (var depo in availableDepartments)        
         {
-            var lectureName = $"Paskaita {DateTime.Now.AddDays(new Random().Next(0, 30)).ToShortDateString()} dienos";
-            var lecture = service.Lectures.CreateLectrue(lectureName);           
+            var lecture = service.Lectures.CreateLectrue(lectureName);
+                   
             service.Departments.AddLecture(depo.Id, lecture);
         }
     }

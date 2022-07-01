@@ -7,16 +7,17 @@ namespace StudentInformationSystem.DAL.Repositories
     {
         private readonly StudentInfoSystemDbContext _context;
 
-        public LecturesRepository()
+        public LecturesRepository(StudentInfoSystemDbContext context)
         {
-            _context = new StudentInfoSystemDbContext();
+            _context = context;
         }
 
         public void AddOrUpdate(ILectureEntity entity)
         {
             var lecture = (Lecture)entity;
+            var status = _context.Entry(entity).State;
             if(lecture.Id == 0)
-                _context.Lectures.Add(lecture);
+                _context.Lectures.Attach(lecture);
             else
                 _context.Lectures.Update(lecture);
             _context.SaveChanges();
@@ -45,7 +46,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IQueryable<ILectureEntity> GetAll()
         {
-            return _context.Lectures;//.AsNoTracking();
+            return _context.Lectures.AsNoTracking();
         }
         #region Dispose methods
         private bool disposed = false;

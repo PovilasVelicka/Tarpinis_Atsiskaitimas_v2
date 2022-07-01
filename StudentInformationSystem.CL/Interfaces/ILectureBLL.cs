@@ -6,5 +6,6 @@
         List<ILectureEntity> GetByName(string name);
         void UpdateLecture(int lectureId, string name);
         void DeleteLecture(int lectureId);
+        ILectureEntity GetById(int id);
     }
 }

@@ -14,23 +14,26 @@ namespace StudentInformationSystem.BLL.Models
         public ILectureEntity CreateLectrue(string name)
         {
             var id = _repository.GetByNameSubstring(name).FirstOrDefault()?.Id ?? 0;
-            ILectureEntity lecture;
+  
             if (id == 0)
-                lecture = new Lecture(name);
-            else
             {
-                lecture = _repository.GetById(id);
+                var lecture = new Lecture(name);
+                _repository.AddOrUpdate(lecture);
+                id = lecture.Id;
             }
-
-            _repository.AddOrUpdate(new Lecture(name));
-
-            return lecture;
+       
+            return _repository.GetById(id);
         }
 
         public void DeleteLecture(int lectureId)
         {
             var lecture = _repository.GetById(lectureId);
 
+        }
+
+        public ILectureEntity GetById(int id)
+        {
+            return _repository.GetById(id);
         }
 
         public List<ILectureEntity> GetByName(string name)

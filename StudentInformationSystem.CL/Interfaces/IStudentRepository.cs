@@ -9,5 +9,6 @@
         IQueryable<IStudentEntity> GetAllByLastName(string lastName);
         void AddOrUpdate(IStudentEntity student);
         void Remove(IStudentEntity student);
+        void SaveChanges();
     }
 }

@@ -11,17 +11,15 @@ namespace StudentInformationSystem.BLL.Models
             _repository = repository;
         }
 
-        public bool CreateStudent(string firstName, string lastName, string personalCode, int departmentId)
+        public IStudentEntity CreateStudent(string firstName, string lastName, string personalCode, int departmentId)
         {
-            var studentExists = _repository.GetByPersonalCode(personalCode) != null;
-            if (!studentExists)
+            var student = _repository.GetByPersonalCode(personalCode);
+            if (student == null)
             {
-                var student = new Student(firstName, lastName, personalCode, departmentId);
-
+                student = new Student(firstName, lastName, personalCode, departmentId);
                 _repository.AddOrUpdate(student);
-                return true;
             }
-            return false;
+            return student;
         }
 
         public void DeleteStudent(int studentId)
@@ -78,5 +76,11 @@ namespace StudentInformationSystem.BLL.Models
             student.PersonalCode = personalCode;
             _repository.AddOrUpdate(student);
         }
+
+        public IStudentEntity GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+ 
     }
 }

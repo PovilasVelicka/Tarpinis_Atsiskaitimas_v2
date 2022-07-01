@@ -4,6 +4,7 @@ namespace StudentInformationSystem.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
+        StudentInfoSystemDbContext context = new StudentInfoSystemDbContext();
         private IDepartmentRepository _departmentRepository = null!;
         private ILectureRepository _lectureRepository = null!;
         private IStudentRepository _studentRepository = null!;
@@ -12,7 +13,7 @@ namespace StudentInformationSystem.DAL
         {
             get
             {
-                if (_departmentRepository == null) _departmentRepository = new DepartmentsRepository();
+                if (_departmentRepository == null) _departmentRepository = new DepartmentsRepository(context);
                 return _departmentRepository;
             }
         }
@@ -21,7 +22,7 @@ namespace StudentInformationSystem.DAL
         {
             get
             {
-                if (_lectureRepository == null) _lectureRepository = new LecturesRepository();
+                if (_lectureRepository == null) _lectureRepository = new LecturesRepository(context);
                 return _lectureRepository;
             }
         }
@@ -30,9 +31,14 @@ namespace StudentInformationSystem.DAL
         {
             get
             {
-                if (_studentRepository == null) _studentRepository = new StudentsRepository();
+                if (_studentRepository == null) _studentRepository = new StudentsRepository(context);
                 return _studentRepository;
             }
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
         }
 
         #region Dispose methods

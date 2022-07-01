@@ -22,6 +22,9 @@ namespace StudentInformationSystem.BLL
         public IStudentBLL Students { get => _studentBLL; }
         public IDepartmentBLL Departments { get => _departmentBLL; }
         public ILectureBLL Lectures { get => _lectureBLL; }
-
+        public void SaveChanges()
+        {
+            _unitOfWork.Save();
+        }
     }
 }
