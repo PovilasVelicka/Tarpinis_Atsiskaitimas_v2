@@ -11,14 +11,14 @@ namespace StudentInformationSystem.DAL.Models
 
         public List<Lecture> Lectures { get; set; } = null!;
 
-        public int DepartmentId { get; set; }
-        public Department Department { get; set; } = null!;
+        public int? DepartmentId { get; set; }
+        public Department? Department { get; set; } = null!;
 
         private Student ( ) { }
 
-        public Student (string firstName, string lastName, string personalCode, int departmentId)
+        public Student (string firstName, string lastName, string personalCode)
         {
-            DepartmentId = departmentId;
+            // DepartmentId = departmentId;
             FirstName = firstName;
             LastName = lastName;
             PersonalCode = personalCode;

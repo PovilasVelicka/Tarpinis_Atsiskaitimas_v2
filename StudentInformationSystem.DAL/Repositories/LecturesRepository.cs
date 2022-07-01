@@ -20,7 +20,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public void Remove (ILectureEntity entity)
         {
-            _context.Lectures.Remove((Lecture)entity;);
+            _context.Lectures.Remove((Lecture)entity);
             _context.SaveChanges( );
         }
 

@@ -16,7 +16,7 @@ namespace StudentInformationSystem.BLL.Models
             var student = _repository.GetByPersonalCode(personalCode);
             if (student == null)
             {
-                student = new Student(firstName, lastName, personalCode, departmentId);
+                student = new Student(firstName, lastName, personalCode);
                 _repository.AddOrUpdate(student);
             }
             return student;
