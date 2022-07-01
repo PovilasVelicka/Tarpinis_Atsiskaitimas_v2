@@ -36,7 +36,7 @@ namespace StudentInformationSystem.DAL.Repositories
                 .Single (i => i.Id == id);
         }
 
-        public IQueryable<ILectureEntity> GetByNameSubstring (string name)
+        public IQueryable<ILectureEntity> GetAllByName (string name)
         {
             return GetAll ( ).Where (n => n.Name.ToLower ( ).Contains (name.ToLower ( )));
         }

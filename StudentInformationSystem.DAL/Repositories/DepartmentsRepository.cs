@@ -34,7 +34,7 @@ namespace StudentInformationSystem.DAL.Repositories
             return GetAll ( ).Where (x => x.City.ToLower ( ).Contains (city.ToLower ( )));
         }
 
-        public IQueryable<IDepartmentEntity> GetAllByNameSubstring (string name)
+        public IQueryable<IDepartmentEntity> GetAllByName (string name)
         {
             return GetAll ( ).Where (n => n.Name.ToLower ( ).Contains (name.ToLower ( )));
         }

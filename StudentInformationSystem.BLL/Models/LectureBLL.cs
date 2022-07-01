@@ -13,7 +13,7 @@ namespace StudentInformationSystem.BLL.Models
 
         public ILectureEntity CreateLectrue(string name)
         {
-            var id = _repository.GetByNameSubstring(name).FirstOrDefault()?.Id ?? 0;
+            var id = _repository.GetAllByName(name).FirstOrDefault()?.Id ?? 0;
   
             if (id == 0)
             {
@@ -38,7 +38,7 @@ namespace StudentInformationSystem.BLL.Models
 
         public List<ILectureEntity> GetByName(string name)
         {
-            return _repository.GetByNameSubstring(name).OrderBy(l => l.Name).ToList();
+            return _repository.GetAllByName(name).OrderBy(l => l.Name).ToList();
         }
 
         public void UpdateLecture(int lectureId, string name)
