@@ -48,28 +48,27 @@ namespace StudentInformationSystem.DAL.Repositories
         {
             return _context.Lectures.AsNoTracking();
         }
-        #region Dispose methods
-        private bool disposed = false;
+        //#region Dispose methods
+        //private bool disposed = false;
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _context.SaveChanges();
-                    _context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!this.disposed)
+        //    {
+        //        if (disposing)
+        //        {                    
+        //            _context.Dispose();
+        //        }
+        //    }
+        //    this.disposed = true;
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
 
-        #endregion
+        //#endregion
     }
 }

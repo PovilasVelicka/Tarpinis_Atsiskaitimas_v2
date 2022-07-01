@@ -50,9 +50,7 @@ namespace StudentInformationSystem.DAL
             {
                 if (disposing)
                 {
-                    Departments?.Dispose();
-                    Lectures?.Dispose();
-                    Students?.Dispose();
+                    context.Dispose();
                 }
             }
             this.disposed = true;

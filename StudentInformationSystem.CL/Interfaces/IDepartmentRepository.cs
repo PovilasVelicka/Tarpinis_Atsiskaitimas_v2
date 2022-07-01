@@ -1,6 +1,6 @@
 ﻿namespace StudentInformationSystem.CL.Interfaces
 {
-    public interface IDepartmentRepository : IDisposable
+    public interface IDepartmentRepository 
     {
         IDepartmentEntity GetById(int id);
         IQueryable<IDepartmentEntity> GetAll();

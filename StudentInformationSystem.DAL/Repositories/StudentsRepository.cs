@@ -61,28 +61,28 @@ namespace StudentInformationSystem.DAL.Repositories
             return GetAll().FirstOrDefault(p => p.PersonalCode == personalCode);
         }
 
-        #region Dispose methods
-        private bool disposed = false;
+        //#region Dispose methods
+        //private bool disposed = false;
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _context.SaveChanges();
-                    _context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!this.disposed)
+        //    {
+        //        if (disposing)
+        //        {
+        //            _context.SaveChanges();
+        //            _context.Dispose();
+        //        }
+        //    }
+        //    this.disposed = true;
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
+        //#endregion
 
     }
 }

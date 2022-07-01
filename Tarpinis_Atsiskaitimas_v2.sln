@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.BL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.DAL", "StudentInformationSystem.DAL\StudentInformationSystem.DAL.csproj", "{B4ED18CD-9415-4B1C-9361-D4897520D9E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentInformationSystem", "StudentInformationSystem\StudentInformationSystem.csproj", "{5C033238-AC2A-4284-9716-7E2389C967B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem", "StudentInformationSystem\StudentInformationSystem.csproj", "{5C033238-AC2A-4284-9716-7E2389C967B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2A58D94C-E308-4F6B-8197-4C9E0738A81A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL_tests", "BLL_tests\BLL_tests.csproj", "{5F343E1B-EC08-4BC9-BC11-086A3F9EE43E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{5C033238-AC2A-4284-9716-7E2389C967B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C033238-AC2A-4284-9716-7E2389C967B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C033238-AC2A-4284-9716-7E2389C967B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F343E1B-EC08-4BC9-BC11-086A3F9EE43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F343E1B-EC08-4BC9-BC11-086A3F9EE43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F343E1B-EC08-4BC9-BC11-086A3F9EE43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F343E1B-EC08-4BC9-BC11-086A3F9EE43E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F343E1B-EC08-4BC9-BC11-086A3F9EE43E} = {2A58D94C-E308-4F6B-8197-4C9E0738A81A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E23FFF0A-2F9F-4AC5-BE0E-F0D406627217}

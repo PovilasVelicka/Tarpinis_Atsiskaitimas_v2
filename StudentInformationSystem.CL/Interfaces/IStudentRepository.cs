@@ -1,6 +1,6 @@
 ﻿namespace StudentInformationSystem.CL.Interfaces
 {
-    public interface IStudentRepository : IDisposable
+    public interface IStudentRepository 
     {
         IStudentEntity GetById(int id);
         IStudentEntity? GetByPersonalCode(string personalCode);

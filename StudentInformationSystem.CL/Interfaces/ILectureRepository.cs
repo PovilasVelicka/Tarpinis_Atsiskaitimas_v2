@@ -1,6 +1,6 @@
 ﻿namespace StudentInformationSystem.CL.Interfaces
 {
-    public interface ILectureRepository : IDisposable
+    public interface ILectureRepository 
     {
         ILectureEntity GetById(int id);
         IQueryable<ILectureEntity> GetByNameSubstring(string nameSubstring);

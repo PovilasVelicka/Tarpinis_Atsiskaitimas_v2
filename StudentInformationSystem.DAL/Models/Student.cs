@@ -10,6 +10,7 @@ namespace StudentInformationSystem.DAL.Models
 
 
         public List<Lecture> Lectures { get; set; } = null!;
+
         public int DepartmentId { get; set; }
         public Department Department { get; set; } = null!;
 
