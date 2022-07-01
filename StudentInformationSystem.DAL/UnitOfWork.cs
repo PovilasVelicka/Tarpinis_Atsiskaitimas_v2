@@ -4,7 +4,7 @@ namespace StudentInformationSystem.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        StudentInfoSystemDbContext context = new StudentInfoSystemDbContext();
+        readonly StudentInfoSystemDbContext context = new();
         private IDepartmentRepository _departmentRepository = null!;
         private ILectureRepository _lectureRepository = null!;
         private IStudentRepository _studentRepository = null!;

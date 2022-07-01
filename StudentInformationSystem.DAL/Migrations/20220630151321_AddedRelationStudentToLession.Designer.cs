@@ -10,7 +10,7 @@ using StudentInformationSystem.DAL;
 
 namespace StudentInformationSystem.DAL.Migrations
 {
-    [DbContext(typeof(StudentInfoSystemDbContext))]
+    [DbContext(typeof(IDbContext))]
     [Migration("20220630151321_AddedRelationStudentToLession")]
     partial class AddedRelationStudentToLession
     {

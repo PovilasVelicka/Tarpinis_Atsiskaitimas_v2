@@ -11,7 +11,7 @@ using StudentInformationSystem.DAL;
 
 namespace StudentInformationSystem.DAL.Migrations
 {
-    [DbContext(typeof(StudentInfoSystemDbContext))]
+    [DbContext(typeof(IDbContext))]
     [Migration("20220630104212_CreateDatabase")]
     partial class CreateDatabase
     {

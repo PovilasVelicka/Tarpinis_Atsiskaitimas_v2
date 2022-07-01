@@ -10,7 +10,7 @@ using StudentInformationSystem.DAL;
 
 namespace StudentInformationSystem.DAL.Migrations
 {
-    [DbContext(typeof(StudentInfoSystemDbContext))]
+    [DbContext(typeof(IDbContext))]
     [Migration("20220630162002_AddDepartmentIdToEntityStudent")]
     partial class AddDepartmentIdToEntityStudent
     {

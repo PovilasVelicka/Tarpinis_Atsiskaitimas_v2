@@ -7,6 +7,5 @@
         IQueryable<ILectureEntity> GetAll();
         void AddOrUpdate(ILectureEntity entity);
         void Remove(ILectureEntity entity);
-
     }
 }

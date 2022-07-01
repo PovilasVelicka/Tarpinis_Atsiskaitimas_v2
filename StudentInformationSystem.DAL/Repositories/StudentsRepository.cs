@@ -1,7 +1,6 @@
-﻿using StudentInformationSystem.CL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.CL.Interfaces;
 using StudentInformationSystem.DAL.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace StudentInformationSystem.DAL.Repositories
 {
@@ -13,14 +12,10 @@ namespace StudentInformationSystem.DAL.Repositories
         {
             _context = context;
         }
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
+
         public void AddOrUpdate(IStudentEntity entity)
         {
             var student = (Student)entity;
-        
             _context.Students.Update(student);
             _context.SaveChanges();
         }
@@ -51,8 +46,8 @@ namespace StudentInformationSystem.DAL.Repositories
         {
             return _context
                 .Students
-                .Include(x=> x.Lectures)
-                .Include(d=>d.Department)
+                .Include(x => x.Lectures)
+                .Include(d => d.Department)
                 .Single(i => i.Id == id);
         }
 
@@ -60,29 +55,5 @@ namespace StudentInformationSystem.DAL.Repositories
         {
             return GetAll().FirstOrDefault(p => p.PersonalCode == personalCode);
         }
-
-        //#region Dispose methods
-        //private bool disposed = false;
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {
-        //            _context.SaveChanges();
-        //            _context.Dispose();
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-        //#endregion
-
     }
 }

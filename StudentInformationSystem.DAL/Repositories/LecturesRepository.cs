@@ -15,11 +15,8 @@ namespace StudentInformationSystem.DAL.Repositories
         public void AddOrUpdate(ILectureEntity entity)
         {
             var lecture = (Lecture)entity;
-            var status = _context.Entry(entity).State;
-            if(lecture.Id == 0)
-                _context.Lectures.Attach(lecture);
-            else
-                _context.Lectures.Update(lecture);
+
+            _context.Lectures.Update(lecture);
             _context.SaveChanges();
         }
 
@@ -34,8 +31,8 @@ namespace StudentInformationSystem.DAL.Repositories
         {
             return _context
                 .Lectures
-                .Include(x=>x.Departments)
-                .Include(s=>s.Students)
+                .Include(x => x.Departments)
+                .Include(s => s.Students)
                 .Single(i => i.Id == id);
         }
 
@@ -47,28 +44,6 @@ namespace StudentInformationSystem.DAL.Repositories
         public IQueryable<ILectureEntity> GetAll()
         {
             return _context.Lectures.AsNoTracking();
-        }
-        //#region Dispose methods
-        //private bool disposed = false;
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {                    
-        //            _context.Dispose();
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //#endregion
+        }        
     }
 }

@@ -13,13 +13,7 @@ namespace StudentInformationSystem.DAL.Repositories
         public void AddOrUpdate(IDepartmentEntity entity)
         {
             var state = _context.Entry(entity).State;
-           
-
-            if (entity.Id==0)
-                _context.Departments.Update((Department)entity);
-            else
-                _context.Departments.Update((Department)entity);
-         
+            _context.Departments.Update((Department)entity);
             _context.SaveChanges();
         }
 
@@ -49,32 +43,9 @@ namespace StudentInformationSystem.DAL.Repositories
         {
             return _context
                 .Departments
-                .Include(l=> l.Lecture )
-                .Include(l=>l.Students)
+                .Include(l => l.Lecture)
+                .Include(l => l.Students)
                 .Single(i => i.Id == id);
         }
-
-        //#region Dispose methods
-        //private bool disposed = false;
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {
-        //            _context.SaveChanges();
-        //            _context.Dispose();
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-        //#endregion
     }
 }

@@ -27,6 +27,10 @@ namespace StudentInformationSystem.BLL
             _unitOfWork.Save();
         }
 
+        public void AddDepartment
+
+
+
         #region Dispose methods
         private bool disposed = false;
 
