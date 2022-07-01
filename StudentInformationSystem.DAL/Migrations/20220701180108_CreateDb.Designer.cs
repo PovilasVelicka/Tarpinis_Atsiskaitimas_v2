@@ -10,7 +10,7 @@ using StudentInformationSystem.DAL;
 
 namespace StudentInformationSystem.DAL.Migrations
 {
-    [DbContext(typeof(StudentInfoSystemDbContext))]
+    [DbContext(typeof(RepositoryDbContext))]
     [Migration("20220701180108_CreateDb")]
     partial class CreateDb
     {

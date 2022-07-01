@@ -1,59 +1,62 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.CL.Interfaces;
 using StudentInformationSystem.DAL.Models;
-
 namespace StudentInformationSystem.DAL.Repositories
 {
     internal class StudentsRepository : IStudentRepository
     {
-        private readonly StudentInfoSystemDbContext _context;
+        private readonly RepositoryDbContext _context;
 
-        public StudentsRepository (StudentInfoSystemDbContext context)
+        public StudentsRepository (RepositoryDbContext context)
         {
             _context = context;
         }
 
         public void AddOrUpdate (IStudentEntity entity)
         {
-            var student = (Student)entity;
-            _context.Students.Update (student);
-            _context.SaveChanges ( );
+            _context.Students.Update((Student)entity);
+            _context.SaveChanges( );
         }
 
         public void Remove (IStudentEntity student)
         {
-            var studentCasted = (Student)student;
-            _context.Students.Remove (studentCasted);
-            _context.SaveChanges ( );
+            _context.Students.Remove((Student)student);
+            _context.SaveChanges( );
         }
 
         public IQueryable<IStudentEntity> GetAll ( )
         {
-            return _context.Students.AsNoTracking ( );
+            return _context.Students.AsNoTracking( );
         }
 
-        public IQueryable<IStudentEntity> GetAllByFirstName (string firstName)
+        public IQueryable<IStudentEntity> GetAllByFirstName (string firstNameSubstring)
         {
-            return GetAll ( ).Where (n => n.FirstName.ToLower ( ).Contains (firstName.ToLower ( )));
+            return GetAll( )
+                .Where(n => n.FirstName.ToLower( ).Contains(firstNameSubstring.ToLower( )));
         }
 
-        public IQueryable<IStudentEntity> GetAllByLastName (string lastName)
+        public IQueryable<IStudentEntity> GetAllByLastName (string lastNameSubstring)
         {
-            return GetAll ( ).Where (n => n.LastName.ToLower ( ).Contains (lastName.ToLower ( )));
+            return GetAll( )
+                .Where(n => n.LastName.ToLower( ).Contains(lastNameSubstring.ToLower( )));
         }
 
         public IStudentEntity GetById (int id)
         {
             return _context
                 .Students
-                .Include (x => x.Lectures)
-                .Include (d => d.Department)
-                .Single (i => i.Id == id);
+                .Include(x => x.Lectures)
+                .Include(d => d.Department)
+                .Single(i => i.Id == id);
         }
 
         public IStudentEntity? GetByPersonalCode (string personalCode)
         {
-            return GetAll ( ).FirstOrDefault (p => p.PersonalCode == personalCode);
+            return _context
+                .Students
+                .Include(x => x.Lectures)
+                .Include(d => d.Department)
+                .FirstOrDefault(p => p.PersonalCode == personalCode);
         }
     }
 }

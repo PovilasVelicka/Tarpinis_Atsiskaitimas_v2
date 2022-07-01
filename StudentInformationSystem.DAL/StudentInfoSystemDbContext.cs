@@ -3,7 +3,7 @@ using StudentInformationSystem.DAL.Models;
 using System.Diagnostics;
 namespace StudentInformationSystem.DAL
 {
-    internal class StudentInfoSystemDbContext : DbContext
+    internal class RepositoryDbContext : DbContext
     {
         public DbSet<Student> Students { get; set; } = null!;
         public DbSet<Department> Departments { get; set; } = null!;

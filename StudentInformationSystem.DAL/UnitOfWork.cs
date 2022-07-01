@@ -1,10 +1,11 @@
 ﻿using StudentInformationSystem.CL.Interfaces;
 using StudentInformationSystem.DAL.Repositories;
+
 namespace StudentInformationSystem.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        readonly StudentInfoSystemDbContext context = new();
+        private readonly RepositoryDbContext context = new ( );
         private IDepartmentRepository _departmentRepository = null!;
         private ILectureRepository _lectureRepository = null!;
         private IStudentRepository _studentRepository = null!;
@@ -13,7 +14,9 @@ namespace StudentInformationSystem.DAL
         {
             get
             {
-                if (_departmentRepository == null) _departmentRepository = new DepartmentsRepository(context);
+                if (_departmentRepository == null) 
+                    _departmentRepository = new DepartmentsRepository (context);
+
                 return _departmentRepository;
             }
         }
@@ -22,7 +25,9 @@ namespace StudentInformationSystem.DAL
         {
             get
             {
-                if (_lectureRepository == null) _lectureRepository = new LecturesRepository(context);
+                if (_lectureRepository == null) 
+                    _lectureRepository = new LecturesRepository (context);
+
                 return _lectureRepository;
             }
         }
@@ -31,35 +36,37 @@ namespace StudentInformationSystem.DAL
         {
             get
             {
-                if (_studentRepository == null) _studentRepository = new StudentsRepository(context);
+                if (_studentRepository == null) 
+                    _studentRepository = new StudentsRepository (context);
+
                 return _studentRepository;
             }
         }
 
-        public void Save()
+        public void Save ( )
         {
-            context.SaveChanges();
+            context.SaveChanges ( );
         }
 
         #region Dispose methods
         private bool disposed = false;
 
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Dispose (bool disposing)
         {
             if (!this.disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    context.Dispose ( );
                 }
             }
             this.disposed = true;
         }
 
-        public void Dispose()
+        public void Dispose ( )
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            Dispose (true);
+            GC.SuppressFinalize (this);
         }
         #endregion
 

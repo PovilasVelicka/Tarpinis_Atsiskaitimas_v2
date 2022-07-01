@@ -9,7 +9,7 @@ using StudentInformationSystem.DAL;
 
 namespace StudentInformationSystem.DAL.Migrations
 {
-    [DbContext(typeof(StudentInfoSystemDbContext))]
+    [DbContext(typeof(RepositoryDbContext))]
     partial class StudentInfoSystemDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
