@@ -49,7 +49,7 @@ namespace StudentInformationSystem.BLL
             if (studenNotExists)
             {
                 var studentEntity = new Student(student.FirstName, student.LastName, student.PersonalCode);
-                _repository.Students.AddOrUpdate(student);
+                _repository.Students.AddOrUpdate(studentEntity);
             }
         }
 
