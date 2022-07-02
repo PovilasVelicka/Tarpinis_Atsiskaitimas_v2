@@ -44,7 +44,7 @@ namespace StudentInformationSystem.DAL.Repositories
         {
             return _context
                 .Departments
-                .Include(l => l.Lecture)
+                .Include(l => l.Lectures)
                 .Include(l => l.Students)
                 .Single(i => i.Id == id);
         }

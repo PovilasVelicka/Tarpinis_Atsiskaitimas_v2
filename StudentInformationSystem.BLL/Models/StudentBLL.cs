@@ -57,7 +57,7 @@ namespace StudentInformationSystem.BLL.Models
         {
             var student = (Student)_repository.GetById(studentId);
             var depo = (Department)department;
-            foreach (var lecture in depo.Lecture)
+            foreach (var lecture in depo.Lectures)
             {
                 if (!student.Lectures.Where(x => x.Id == lecture.Id).Any())
                 {

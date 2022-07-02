@@ -15,9 +15,9 @@ namespace StudentInformationSystem.BLL.Models
         public void AddLecture (int departmentId, ILectureEntity lecture)
         {
             var department = (Department)GetById (departmentId);
-            if (!department.Lecture.Where (l => l.Id == lecture.Id).Any ( ))
+            if (!department.Lectures.Where (l => l.Id == lecture.Id).Any ( ))
             {
-                department.Lecture.Add ((Lecture)lecture);
+                department.Lectures.Add ((Lecture)lecture);
                 _repository.AddOrUpdate (department);
             }
         }

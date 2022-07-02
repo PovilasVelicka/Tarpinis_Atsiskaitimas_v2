@@ -132,7 +132,7 @@ namespace BLL_tests
                     service.Departments.AddLecture(depart.Id, lecture);
 
                     var depo = (Department)service.Departments.GetById(depart.Id);
-                    var lectureCount = depo.Lecture.Where(l => l.Id == lecture.Id).Count();
+                    var lectureCount = depo.Lectures.Where(l => l.Id == lecture.Id).Count();
                     Assert.That(lectureCount, Is.EqualTo(1));
                 }                
             }

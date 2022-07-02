@@ -9,7 +9,7 @@ namespace StudentInformationSystem.DAL.Models
         public string City { get; set; } = null!;
 
         public virtual List<Student> Students { get; set; } = null!;
-        public virtual List<Lecture> Lecture { get; set; } = null!;
+        public virtual List<Lecture> Lectures { get; set; } = null!;
         private Department() { }
 
         public Department(string name, string city)
@@ -17,7 +17,7 @@ namespace StudentInformationSystem.DAL.Models
             Name = name;
             City = city;
             Students = new List<Student>();
-            Lecture = new List<Lecture>();
+            Lectures = new List<Lecture>();
         }
     }
 }
