@@ -1,21 +1,30 @@
 ﻿using StudentInformationSystem.DAL.Interfaces;
 using System.Runtime.CompilerServices;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 [assembly: InternalsVisibleTo("StudentInformationSystem.BLL")]
 
 namespace StudentInformationSystem.DAL.Models
 {
+    [Table("Lectures",Schema ="InfoSystem")]
+    [Index("Title",Name = "UX_Lecture_Title",IsUnique =true)]
     internal class Lecture : ILectureEntity
     {
+        [Key]
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
 
-        public List<Department> Departments { get; set; } = null!;
-        public List<Student> Students { get; set; } = null!;
+        [Required]
+        [StringLength(150)]
+        public string Title { get; set; } = null!;
+
+        public virtual List<Department> Departments { get; set; } = null!;
+        public virtual List<Student> Students { get; set; } = null!;
         private Lecture() { }
 
-        public Lecture(string name)
+        public Lecture(string title)
         {
-            Name = name;
+            Title = title;
             Departments = new List<Department>();
             Students = new List<Student>();
         }

@@ -46,7 +46,7 @@ namespace StudentInformationSystem.BLL
             var lectureEntity = (Lecture)_repository.Lectures.GetById(lecture.Id);
             var depo = (Department)_repository.Departments.GetById(department.Id);
 
-            if (!depo.Lectures.Where(l => l.Name == lecture.Title).Any( ))
+            if (!depo.Lectures.Where(l => l.Title == lecture.Title).Any( ))
             {
                 depo.Lectures.Add(lectureEntity);
                 foreach (var student in depo.Students)
@@ -105,7 +105,7 @@ namespace StudentInformationSystem.BLL
                     new LectureDto
                     {
                         Id = l.Id,
-                        Title = l.Name
+                        Title = l.Title
                     })
                 .ToList<ILectureDto>( );
         }
@@ -119,7 +119,7 @@ namespace StudentInformationSystem.BLL
                     new LectureDto
                     {
                         Id = l.Id,
-                        Title = l.Name,
+                        Title = l.Title,
                     })
                 .ToList<ILectureDto>( );
         }
@@ -198,7 +198,7 @@ namespace StudentInformationSystem.BLL
             return new LectureDto
             {
                 Id = lecture.Id,
-                Title = lecture.Name
+                Title = lecture.Title
             };
 
         }
