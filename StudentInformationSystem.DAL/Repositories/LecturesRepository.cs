@@ -33,15 +33,31 @@ namespace StudentInformationSystem.DAL.Repositories
                 .Single(i => i.Id == id);
         }
 
+        public IQueryable<ILectureEntity> GetAllByName (string nameSubstring)
+        {
+            return GetAll( )
+                .Where(n => n.Name.ToLower( ).Contains(nameSubstring.ToLower( )));
+        }
+
         public IQueryable<ILectureEntity> GetAll ( )
         {
             return _context.Lectures.AsNoTracking( );
         }
 
-        public IQueryable<ILectureEntity> GetAllByName (string nameSubstring)
+        public IQueryable<ILectureEntity> GetByDepartmentId (int departmentId)
         {
-            return GetAll( )
-                .Where(n => n.Name.ToLower( ).Contains(nameSubstring.ToLower( )));
+            return _context
+                .Lectures
+                .Where(l => l.Departments.Any(d => d.Id.Equals(departmentId)))
+                .AsNoTracking( );
+        }
+
+        public IQueryable<ILectureEntity> GetByStudentId (int studentId)
+        {
+            return _context
+                .Lectures
+                .Where(l => l.Students.Any(s => s.Id.Equals(studentId)))
+                .AsNoTracking( );
         }
     }
 }

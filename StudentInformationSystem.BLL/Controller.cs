@@ -68,44 +68,130 @@ namespace StudentInformationSystem.BLL
         {
             AddStudentTo(student, department);
         }
+
         public List<IDepartmentDto> GetDepartments ( )
         {
-            throw new NotImplementedException( );
+            return GetAllDepartments( ).ToList<IDepartmentDto>( );
         }
 
         public List<IDepartmentDto> GetDepartments (string departmentNameSubstring)
         {
-            throw new NotImplementedException( );
+            var nameLowerCase = departmentNameSubstring.ToLower( );
+
+            return GetAllDepartments( )
+                .Where(d => d.Name.ToLower( ).Contains(nameLowerCase)).
+                ToList<IDepartmentDto>( );
         }
 
         public List<ILectureDto> GetLecturesByDepartmentId (int departmentId)
         {
-            throw new NotImplementedException( );
+            return _repository
+                .Lectures
+                .GetByDepartmentId(departmentId)
+                .Select(l =>
+                    new LectureDto
+                    {
+                        Id = l.Id,
+                        Title = l.Name
+                    })
+                .ToList<ILectureDto>( );
         }
 
         public List<ILectureDto> GetLecturesByStudentId (int studentId)
         {
-            throw new NotImplementedException( );
+            return _repository
+                .Lectures
+                .GetByStudentId(studentId)
+                .Select(l =>
+                    new LectureDto
+                    {
+                        Id = l.Id,
+                        Title = l.Name,
+                    })
+                .ToList<ILectureDto>( );
         }
 
         public List<IStudentDto> GetStudents ( )
         {
-            throw new NotImplementedException( );
+            var result = from student in _repository.Students.GetAll( )
+                         join depo in _repository.Departments.GetAll( ) on student.DepartmentId equals depo.Id
+                         select new StudentDto
+                         {
+                             Id = student.Id,
+                             FirstName = student.FirstName,
+                             LastName = student.LastName,
+                             PersonalCode = student.PersonalCode,
+                             DepartmentName = depo.Name,
+                             DepartmenCity = depo.City,
+                         };
+            return result.ToList<IStudentDto>( );
         }
 
         public List<IStudentDto> GetStudents (string departmentNameSubstring)
         {
-            throw new NotImplementedException( );
+            var result = from student in _repository.Students.GetAll( )
+                         join depo in _repository.Departments.GetAll( ) on student.DepartmentId equals depo.Id
+                         where depo.Name.ToLower( ).Contains(departmentNameSubstring.ToLower( ))
+                         select new StudentDto
+                         {
+                             Id = student.Id,
+                             FirstName = student.FirstName,
+                             LastName = student.LastName,
+                             PersonalCode = student.PersonalCode,
+                             DepartmentName = depo.Name,
+                             DepartmenCity = depo.City,
+                         };
+            return result.ToList<IStudentDto>( );
         }
 
         public List<IStudentDto> GetStudents (string firstNameSubstring, string lastNameSubstring)
         {
-            throw new NotImplementedException( );
+            var result = from student in _repository.Students.GetAll( )
+                         join depo in _repository.Departments.GetAll( ) on student.DepartmentId equals depo.Id
+                         where student.FirstName.ToLower( ).Contains(firstNameSubstring.ToLower( ))
+                               && student.LastName.ToLower( ).Contains(lastNameSubstring.ToLower( ))
+                         select new StudentDto
+                         {
+                             Id = student.Id,
+                             FirstName = student.FirstName,
+                             LastName = student.LastName,
+                             PersonalCode = student.PersonalCode,
+                             DepartmentName = depo.Name,
+                             DepartmenCity = depo.City,
+                         };
+            return result.ToList<IStudentDto>( );
         }
 
         public List<IStudentDto> GetStudentsByDepartmentId (int departmentId)
         {
-            throw new NotImplementedException( );
+            var result = from student in _repository.Students.GetAll( )
+                         join depo in _repository.Departments.GetAll( ) on student.DepartmentId equals depo.Id
+                         where depo.Id.Equals(departmentId)
+                         select new StudentDto
+                         {
+                             Id = student.Id,
+                             FirstName = student.FirstName,
+                             LastName = student.LastName,
+                             PersonalCode = student.PersonalCode,
+                             DepartmentName = depo.Name,
+                             DepartmenCity = depo.City,
+                         };
+            return result.ToList<IStudentDto>( );
+        }
+
+        private IQueryable<IDepartmentDto> GetAllDepartments ( )
+        {
+            return
+             _repository
+             .Departments
+             .GetAll( )
+             .Select(d =>
+                 new DepartmentDto( )
+                 {
+                     Id = d.Id,
+                     Name = d.Name,
+                     City = d.City
+                 });
         }
 
 
