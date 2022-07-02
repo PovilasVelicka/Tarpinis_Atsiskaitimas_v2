@@ -12,45 +12,54 @@ namespace StudentInformationSystem.BLL
             _repository = new UnitOfWork( );
         }
 
-        public void AddDepartment (IDepartmentDto department)
+        public IDepartmentDto AddDepartment (string departmentName, string city)
         {
-            var exists = _repository.Departments.GetAllByName(department.Name).Any( );
-            if (!exists)
+            var departmentEntity = _repository
+                .Departments
+                .GetAllByName(departmentName)
+                .Where(c => c.City.ToLower( ).Equals(city.ToLower( )))
+                .FirstOrDefault();
+
+            if (departmentEntity == null)
             {
-                var departmentEntity = new Department(department.Name, department.City);
-                _repository.Departments.AddOrUpdate(departmentEntity);
+                departmentEntity = new Department(departmentName, city);
+                _repository.Departments.AddOrUpdate(departmentEntity);                
             }
+
+            return GetDepartmentById(departmentEntity.Id);
         }
 
-        public void AddLecture (ILectureDto lecture)
+        public ILectureDto AddLecture (string title)
         {
-            var exists = _repository.Lectures.GetAllByName(lecture.Title).Any( );
-            if (!exists)
+            var lecture = _repository.Lectures.GetAllByName(title).FirstOrDefault();
+            if (lecture == null)
             {
-                _repository.Lectures.AddOrUpdate(new Lecture(lecture.Title));
+                lecture = new Lecture(title);
+                _repository.Lectures.AddOrUpdate(lecture);
             }
+            return GetLectureById(lecture.Id);
         }
 
         public void AddLectureTo (ILectureDto lecture, IDepartmentDto department)
         {
-            AddLecture(lecture);
-            var lectureEntity = (Lecture)_repository.Lectures.GetAllByName(lecture.Title).First( );
-            var depo = (Department)_repository.Departments.GetById(department.Id);
+            var lectureEntity = (Lecture)lecture;
+            var depo = (Department)department;
             if (!depo.Lectures.Where(l => l.Name == lecture.Title).Any( ))
             {
                 depo.Lectures.Add(lectureEntity);
-                _repository.Departments.AddOrUpdate(depo);
+                _repository.Save( );//.Departments.AddOrUpdate(depo);
             }
         }
 
-        public void AddStudent (IStudentDto student)
+        public IStudentDto AddStudent (string firstName, string lastName, string personalCode)
         {
-            var studenNotExists = _repository.Students.GetByPersonalCode(student.PersonalCode) == null;
-            if (studenNotExists)
+            var studentEntity = _repository.Students.GetByPersonalCode(personalCode);
+            if (studentEntity == null)
             {
-                var studentEntity = new Student(student.FirstName, student.LastName, student.PersonalCode);
+                studentEntity = new Student(firstName, lastName, personalCode);
                 _repository.Students.AddOrUpdate(studentEntity);
             }
+            return GetStudentById(studentEntity.Id);
         }
 
         public void AddStudentTo (IStudentDto student, IDepartmentDto department)
@@ -132,7 +141,7 @@ namespace StudentInformationSystem.BLL
             var result = from student in _repository.Students.GetAll( )
                          join depo in _repository.Departments.GetAll( ) on student.DepartmentId equals depo.Id
                          where depo.Name.ToLower( ).Contains(departmentNameSubstring.ToLower( ))
-                         select new StudentDto
+                         select new StudentDto( )
                          {
                              Id = student.Id,
                              FirstName = student.FirstName,
@@ -194,6 +203,45 @@ namespace StudentInformationSystem.BLL
                  });
         }
 
+        public ILectureDto GetLectureById (int id)
+        {
+            var lecture = _repository.Lectures.GetById(id);
+            return new LectureDto
+            {
+                Id = lecture.Id,
+                Title = lecture.Name
+            };
 
+        }
+
+        public IDepartmentDto GetDepartmentById (int id)
+        {
+            var depo = _repository.Departments.GetById(id);
+            return new DepartmentDto
+            {
+                Id = depo.Id,
+                Name = depo.Name,
+                City = depo.City,
+            };
+        }
+
+        public IStudentDto GetStudentById (int id)
+        {
+            IDepartmentDto depo = null!;
+            var student = _repository.Students.GetById(id);
+
+            if (student.DepartmentId != null)
+                depo = GetDepartmentById(student.Id);
+
+            return new StudentDto
+            {
+                Id = student.Id,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                PersonalCode = student.PersonalCode,
+                DepartmentName = depo?.Name ?? "",
+                DepartmenCity = depo?.City ?? "",
+            };
+        }
     }
 }

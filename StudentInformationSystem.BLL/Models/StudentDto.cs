@@ -1,6 +1,6 @@
 ﻿namespace StudentInformationSystem.BLL.Models
 {
-    public class StudentDto : IStudentDto
+    internal sealed class StudentDto : IStudentDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;

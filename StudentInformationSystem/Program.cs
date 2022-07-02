@@ -1,17 +1,12 @@
 ﻿using StudentInformationSystem.BLL;
 using StudentInformationSystem.BLL.Models;
-IController controller = new Controller( );
 
-IStudentDto student = new StudentDto
-{
-    FirstName = "Povilas",
-    LastName = "Velicka",
-    PersonalCode = "37501050000",
-    DepartmentName = "Klaipedos filialas",
-    DepartmenCity = "Klaipeda"
+var controller = new Controller( );
 
-};
-controller.AddStudent(student);
+controller.AddDepartment("Klaipėdos gimnazija", "Klaipėda");
+
+
+
 
 
 
