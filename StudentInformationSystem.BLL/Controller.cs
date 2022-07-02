@@ -8,9 +8,9 @@ namespace StudentInformationSystem.BLL
     {
         private readonly UnitOfWork _repository;
 
-        public Controller ( )
+        public Controller (bool inTestMode = false)
         {
-            _repository = new UnitOfWork( );
+            _repository = new UnitOfWork(inTestMode);
         }
 
         public IDepartmentDto AddDepartment (string departmentName, string city)
@@ -190,7 +190,7 @@ namespace StudentInformationSystem.BLL
                              DepartmenCity = depo.City,
                          };
             return result.ToList<IStudentDto>( );
-        }       
+        }
 
         public ILectureDto GetLectureById (int id)
         {

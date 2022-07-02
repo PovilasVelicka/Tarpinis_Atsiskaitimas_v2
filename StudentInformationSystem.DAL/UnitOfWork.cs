@@ -1,21 +1,31 @@
-﻿using StudentInformationSystem.DAL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.DAL.Interfaces;
 using StudentInformationSystem.DAL.Repositories;
 
 namespace StudentInformationSystem.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly RepositoryDbContext context = new ( );
+        private readonly RepositoryDbContext _context;
         private IDepartmentRepository _departmentRepository = null!;
         private ILectureRepository _lectureRepository = null!;
         private IStudentRepository _studentRepository = null!;
+        public UnitOfWork ( )
+        {
+             _context = new( );
+          
+        }
+        public UnitOfWork (bool inTestMode )
+        {
+            _context = new RepositoryDbContext(inTestMode);  
+        }
 
         public IDepartmentRepository Departments
         {
             get
             {
                 if (_departmentRepository == null) 
-                    _departmentRepository = new DepartmentsRepository (context);
+                    _departmentRepository = new DepartmentsRepository (_context);
 
                 return _departmentRepository;
             }
@@ -26,7 +36,7 @@ namespace StudentInformationSystem.DAL
             get
             {
                 if (_lectureRepository == null) 
-                    _lectureRepository = new LecturesRepository (context);
+                    _lectureRepository = new LecturesRepository (_context);
 
                 return _lectureRepository;
             }
@@ -37,7 +47,7 @@ namespace StudentInformationSystem.DAL
             get
             {
                 if (_studentRepository == null) 
-                    _studentRepository = new StudentsRepository (context);
+                    _studentRepository = new StudentsRepository (_context);
 
                 return _studentRepository;
             }
@@ -45,7 +55,7 @@ namespace StudentInformationSystem.DAL
 
         public void Save ( )
         {
-            context.SaveChanges ( );
+            _context.SaveChanges ( );
         }
 
         #region Dispose methods
@@ -57,7 +67,7 @@ namespace StudentInformationSystem.DAL
             {
                 if (disposing)
                 {
-                    context.Dispose ( );
+                    _context.Dispose ( );
                 }
             }
             this.disposed = true;

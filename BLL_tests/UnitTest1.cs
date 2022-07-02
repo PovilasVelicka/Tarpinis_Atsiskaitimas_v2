@@ -7,7 +7,7 @@ namespace BLL_tests
 {
     public class Tests
     {
-        readonly string[] lectureNames = new string[]
+        readonly string [ ] lectureNames = new string [ ]
             {
                 "Duomenu bazes",
                 "DBMS",
@@ -17,6 +17,11 @@ namespace BLL_tests
                 "Dapper"
             };
 
+        [Test]
+        public void test ( )
+        {
+         
+        }
 
         //[Test]
         //public void Department_CreaateCheck_Test()

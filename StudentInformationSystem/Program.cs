@@ -1,7 +1,16 @@
 ﻿using StudentInformationSystem.BLL;
 using StudentInformationSystem.BLL.DTOs;
 
-var controller = new Controller( );
+var controller = new Controller(inTestMode: false );
+
+var depo = controller.AddDepartment("CodeAcademy", "Klaipeda");
+
+var depoGet = controller.GetDepartments( );
+
+foreach (var dep in depoGet)
+{
+    Console.WriteLine($"Depo name: {dep.Name}, depo city: {dep.City}");
+}
 
 
 

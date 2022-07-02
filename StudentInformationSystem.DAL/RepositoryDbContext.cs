@@ -1,19 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.DAL.Models;
-using System.Diagnostics;
 namespace StudentInformationSystem.DAL
 {
     internal class RepositoryDbContext : DbContext
     {
+        private readonly bool _inMemory = false;
         public DbSet<Student> Students { get; set; } = null!;
         public DbSet<Department> Departments { get; set; } = null!;
         public DbSet<Lecture> Lectures { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public RepositoryDbContext ( )
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=StudentsInfoSystem-prod;Trusted_Connection=True;");
-            //optionsBuilder.LogTo(message => Debug.WriteLine(message));
+            _inMemory = false;
         }
 
+        public RepositoryDbContext (bool inTestMode)
+        {
+            _inMemory = inTestMode;
+        }
+
+        protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
+        {
+            if (_inMemory)
+                optionsBuilder.UseInMemoryDatabase("StudentsInfoSystem-prod");
+            else
+                optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=StudentsInfoSystem-prod;Trusted_Connection=True;");
+
+        }
     }
 }
