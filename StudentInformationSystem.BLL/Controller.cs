@@ -7,6 +7,7 @@ namespace StudentInformationSystem.BLL
     public class Controller : IController
     {
         private readonly UnitOfWork _repository;
+
         public Controller ( )
         {
             _repository = new UnitOfWork( );
@@ -42,13 +43,21 @@ namespace StudentInformationSystem.BLL
 
         public void AddLectureTo (ILectureDto lecture, IDepartmentDto department)
         {
-            var lectureEntity = (Lecture)lecture;
-            var depo = (Department)department;
+            var lectureEntity = (Lecture)_repository.Lectures.GetById(lecture.Id);
+            var depo = (Department)_repository.Departments.GetById(department.Id);
+
             if (!depo.Lectures.Where(l => l.Name == lecture.Title).Any( ))
             {
                 depo.Lectures.Add(lectureEntity);
-                _repository.Save( );//.Departments.AddOrUpdate(depo);
+                foreach (var student in depo.Students)
+                {
+                    var studentHasLectrue = GetLecturesByStudentId(student.Id).Where(l => l.Id == lecture.Id).Any( );
+                    if (!studentHasLectrue)
+                        student.Lectures.Add(lectureEntity);
+                }
+                _repository.Save( );
             }
+
         }
 
         public IStudentDto AddStudent (string firstName, string lastName, string personalCode)

@@ -3,8 +3,19 @@ using StudentInformationSystem.BLL.Models;
 
 var controller = new Controller( );
 
-controller.AddDepartment("Klaipėdos gimnazija", "Klaipėda");
+var depo = controller.AddDepartment("Klaipėdos gimnazija", "Klaipėda");
+var student = controller.AddStudent("Povilas", "Velicka", "37501050000");
+var lecture = controller.AddLecture("Domenu bazes");
 
+controller.AddStudentTo(student, depo);
+controller.AddLectureTo(lecture, depo);
+
+var depoCodeAcademyK = controller.AddDepartment("CodeAcademy", "Kaunas");
+controller.AddLectureTo(lecture, depoCodeAcademyK);
+
+controller.TransverStudetnTo(student, depoCodeAcademyK);
+
+Console.WriteLine();
 
 
 
