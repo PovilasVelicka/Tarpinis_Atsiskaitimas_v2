@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.BLL.Models
 {
-    public  interface ILectureDto
+    public interface ILectureDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
     }
 }

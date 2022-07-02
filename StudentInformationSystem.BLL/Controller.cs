@@ -61,12 +61,53 @@ namespace StudentInformationSystem.BLL
             studentEntity.Department = departmentEntity;
             studentEntity.Lectures.Clear( );
             studentEntity.Lectures.AddRange(departmentEntity.Lectures);
-
+            _repository.Save( );
         }
 
         public void TransverStudetnTo (IStudentDto student, IDepartmentDto department)
         {
+            AddStudentTo(student, department);
+        }
+        public List<IDepartmentDto> GetDepartments ( )
+        {
             throw new NotImplementedException( );
         }
+
+        public List<IDepartmentDto> GetDepartments (string departmentNameSubstring)
+        {
+            throw new NotImplementedException( );
+        }
+
+        public List<ILectureDto> GetLecturesByDepartmentId (int departmentId)
+        {
+            throw new NotImplementedException( );
+        }
+
+        public List<ILectureDto> GetLecturesByStudentId (int studentId)
+        {
+            throw new NotImplementedException( );
+        }
+
+        public List<IStudentDto> GetStudents ( )
+        {
+            throw new NotImplementedException( );
+        }
+
+        public List<IStudentDto> GetStudents (string departmentNameSubstring)
+        {
+            throw new NotImplementedException( );
+        }
+
+        public List<IStudentDto> GetStudents (string firstNameSubstring, string lastNameSubstring)
+        {
+            throw new NotImplementedException( );
+        }
+
+        public List<IStudentDto> GetStudentsByDepartmentId (int departmentId)
+        {
+            throw new NotImplementedException( );
+        }
+
+
     }
 }
