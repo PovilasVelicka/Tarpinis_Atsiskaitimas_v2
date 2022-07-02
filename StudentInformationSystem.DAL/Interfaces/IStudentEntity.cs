@@ -1,4 +1,4 @@
-﻿namespace StudentInformationSystem.CL.Interfaces
+﻿namespace StudentInformationSystem.DAL.Interfaces
 {
     public interface IStudentEntity
     {

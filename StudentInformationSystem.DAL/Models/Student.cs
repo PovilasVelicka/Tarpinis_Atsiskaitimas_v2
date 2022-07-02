@@ -1,7 +1,10 @@
-﻿using StudentInformationSystem.CL.Interfaces;
+﻿using StudentInformationSystem.DAL.Interfaces;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("StudentInformationSystem.BLL")]
+
 namespace StudentInformationSystem.DAL.Models
 {
-    public class Student : IStudentEntity
+    internal class Student : IStudentEntity
     {
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;

@@ -1,5 +1,5 @@
 ﻿using StudentInformationSystem.BLL;
-using StudentInformationSystem.BLL.Models;
+using StudentInformationSystem.BLL.DTOs;
 
 var controller = new Controller( );
 

@@ -1,8 +1,10 @@
-﻿using StudentInformationSystem.CL.Interfaces;
+﻿using StudentInformationSystem.DAL.Interfaces;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("StudentInformationSystem.BLL")]
 
 namespace StudentInformationSystem.DAL.Models
 {
-    public class Lecture : ILectureEntity
+    internal class Lecture : ILectureEntity
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

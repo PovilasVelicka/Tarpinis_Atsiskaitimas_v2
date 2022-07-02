@@ -19,8 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\StudentInformationSystem.CL\StudentInformationSystem.CL.csproj" />
-  </ItemGroup>
-
 </Project>

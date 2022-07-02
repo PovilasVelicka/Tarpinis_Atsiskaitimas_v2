@@ -1,4 +1,4 @@
-﻿namespace StudentInformationSystem.BLL.Models
+﻿namespace StudentInformationSystem.BLL.DTOs
 {
     public interface ILectureDto
     {

@@ -1,4 +1,4 @@
-﻿using StudentInformationSystem.BLL.Models;
+﻿using StudentInformationSystem.BLL.DTOs;
 using StudentInformationSystem.DAL;
 using StudentInformationSystem.DAL.Models;
 
@@ -80,11 +80,6 @@ namespace StudentInformationSystem.BLL
             studentEntity.Lectures.Clear( );
             studentEntity.Lectures.AddRange(departmentEntity.Lectures);
             _repository.Save( );
-        }
-
-        public void TransverStudetnTo (IStudentDto student, IDepartmentDto department)
-        {
-            AddStudentTo(student, department);
         }
 
         public List<IDepartmentDto> GetDepartments ( )
@@ -195,22 +190,7 @@ namespace StudentInformationSystem.BLL
                              DepartmenCity = depo.City,
                          };
             return result.ToList<IStudentDto>( );
-        }
-
-        private IQueryable<IDepartmentDto> GetAllDepartments ( )
-        {
-            return
-             _repository
-             .Departments
-             .GetAll( )
-             .Select(d =>
-                 new DepartmentDto( )
-                 {
-                     Id = d.Id,
-                     Name = d.Name,
-                     City = d.City
-                 });
-        }
+        }       
 
         public ILectureDto GetLectureById (int id)
         {
@@ -251,6 +231,21 @@ namespace StudentInformationSystem.BLL
                 DepartmentName = depo?.Name ?? "",
                 DepartmenCity = depo?.City ?? "",
             };
+        }
+
+        private IQueryable<IDepartmentDto> GetAllDepartments ( )
+        {
+            return
+             _repository
+             .Departments
+             .GetAll( )
+             .Select(d =>
+                 new DepartmentDto( )
+                 {
+                     Id = d.Id,
+                     Name = d.Name,
+                     City = d.City
+                 });
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿namespace StudentInformationSystem.CL.Interfaces
+﻿
+namespace StudentInformationSystem.DAL.Interfaces
 {
+
     public interface IDepartmentEntity
     {
         public int Id { get; set; }

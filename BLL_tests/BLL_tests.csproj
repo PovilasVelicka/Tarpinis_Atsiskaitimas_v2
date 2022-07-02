@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StudentInformationSystem.BLL\StudentInformationSystem.BLL.csproj" />
-    <ProjectReference Include="..\StudentInformationSystem.CL\StudentInformationSystem.CL.csproj" />
     <ProjectReference Include="..\StudentInformationSystem.DAL\StudentInformationSystem.DAL.csproj" />
   </ItemGroup>
 

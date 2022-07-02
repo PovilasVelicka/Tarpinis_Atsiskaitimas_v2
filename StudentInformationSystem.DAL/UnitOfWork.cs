@@ -1,4 +1,4 @@
-﻿using StudentInformationSystem.CL.Interfaces;
+﻿using StudentInformationSystem.DAL.Interfaces;
 using StudentInformationSystem.DAL.Repositories;
 
 namespace StudentInformationSystem.DAL

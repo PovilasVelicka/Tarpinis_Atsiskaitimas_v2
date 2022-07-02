@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudentInformationSystem.CL.Interfaces;
+using StudentInformationSystem.DAL.Interfaces;
 using StudentInformationSystem.DAL.Models;
 namespace StudentInformationSystem.DAL.Repositories
 {

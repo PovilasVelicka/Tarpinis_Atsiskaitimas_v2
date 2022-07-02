@@ -1,6 +1,6 @@
 
 using StudentInformationSystem.BLL;
-using StudentInformationSystem.CL.Interfaces;
+using StudentInformationSystem.DAL.Interfaces;
 using StudentInformationSystem.DAL.Models;
 
 namespace BLL_tests
