@@ -32,7 +32,7 @@ namespace StudentInformationSystem.DAL.Models
         public virtual List<Lecture> Lectures { get; set; } = null!;
 
         public int? DepartmentId { get; set; }
-        public Department? Department { get; set; } = null!;
+        public virtual Department? Department { get; set; } = null!;
 
         private Student ( ) { }
 

@@ -13,7 +13,7 @@ namespace StudentInformationSystem.DAL.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(150)]
         public string Name { get; set; } = null!;
 
         [Required]

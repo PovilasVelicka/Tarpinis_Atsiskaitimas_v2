@@ -11,7 +11,7 @@ namespace StudentInformationSystem.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=StudentInfoSystem-prod;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=StudentsInfoSystem-prod;Trusted_Connection=True;");
             //optionsBuilder.LogTo(message => Debug.WriteLine(message));
         }
 
