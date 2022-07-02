@@ -19,12 +19,12 @@ namespace StudentInformationSystem.BLL
                 .Departments
                 .GetAllByName(departmentName)
                 .Where(c => c.City.ToLower( ).Equals(city.ToLower( )))
-                .FirstOrDefault();
+                .FirstOrDefault( );
 
             if (departmentEntity == null)
             {
                 departmentEntity = new Department(departmentName, city);
-                _repository.Departments.AddOrUpdate(departmentEntity);                
+                _repository.Departments.AddOrUpdate(departmentEntity);
             }
 
             return GetDepartmentById(departmentEntity.Id);
@@ -32,7 +32,7 @@ namespace StudentInformationSystem.BLL
 
         public ILectureDto AddLecture (string title)
         {
-            var lecture = _repository.Lectures.GetAllByName(title).FirstOrDefault();
+            var lecture = _repository.Lectures.GetAllByName(title).FirstOrDefault( );
             if (lecture == null)
             {
                 lecture = new Lecture(title);
@@ -240,7 +240,7 @@ namespace StudentInformationSystem.BLL
             var student = _repository.Students.GetById(id);
 
             if (student.DepartmentId != null)
-                depo = GetDepartmentById(student.Id);
+                depo = GetDepartmentById(student.DepartmentId ?? 0);
 
             return new StudentDto
             {
