@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.DAL.Models;
-namespace StudentInformationSystem.DAL
+namespace StudentInformationSystem.DAL.DataProviders.EF
 {
     internal class RepositoryDbContext : DbContext
     {
         private readonly bool _inMemory = false;
+
         public DbSet<Student> Students { get; set; } = null!;
         public DbSet<Department> Departments { get; set; } = null!;
         public DbSet<Lecture> Lectures { get; set; } = null!;

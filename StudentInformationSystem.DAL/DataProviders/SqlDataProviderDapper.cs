@@ -1,31 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using StudentInformationSystem.DAL.DataProviders.Dapper;
+using StudentInformationSystem.DAL.DataProviders.Dapper.Repositories;
 using StudentInformationSystem.DAL.Interfaces;
-using StudentInformationSystem.DAL.Repositories;
-
-namespace StudentInformationSystem.DAL
+namespace StudentInformationSystem.DAL.DataProviders
 {
-    public class UnitOfWork : IUnitOfWork
+    public class SqlDataProviderDapper : IDataProvider
     {
+
         private readonly RepositoryDbContext _context;
         private IDepartmentRepository _departmentRepository = null!;
         private ILectureRepository _lectureRepository = null!;
         private IStudentRepository _studentRepository = null!;
-        public UnitOfWork ( )
+
+        public SqlDataProviderDapper ( )
         {
-             _context = new( );
-          
+            _context = new(inTestMode: false);
         }
-        public UnitOfWork (bool inTestMode )
+
+        public SqlDataProviderDapper (bool inTestMode)
         {
-            _context = new RepositoryDbContext(inTestMode);  
+            _context = new(inTestMode);
         }
 
         public IDepartmentRepository Departments
         {
             get
             {
-                if (_departmentRepository == null) 
-                    _departmentRepository = new DepartmentsRepository (_context);
+                if (_departmentRepository == null) _departmentRepository = new DepartmentsRepository(_context);
 
                 return _departmentRepository;
             }
@@ -35,8 +35,7 @@ namespace StudentInformationSystem.DAL
         {
             get
             {
-                if (_lectureRepository == null) 
-                    _lectureRepository = new LecturesRepository (_context);
+                if (_lectureRepository == null) _lectureRepository = new LecturesRepository( );
 
                 return _lectureRepository;
             }
@@ -46,16 +45,14 @@ namespace StudentInformationSystem.DAL
         {
             get
             {
-                if (_studentRepository == null) 
-                    _studentRepository = new StudentsRepository (_context);
-
+                if (_studentRepository == null) _studentRepository = new StudentRepository( );
                 return _studentRepository;
             }
         }
 
         public void Save ( )
         {
-            _context.SaveChanges ( );
+            
         }
 
         #region Dispose methods
@@ -63,22 +60,21 @@ namespace StudentInformationSystem.DAL
 
         protected virtual void Dispose (bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
-                    _context.Dispose ( );
+                    //_context.Dispose( );
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose ( )
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
         #endregion
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.DAL.DataProviders.EF;
 using StudentInformationSystem.DAL.Interfaces;
 using StudentInformationSystem.DAL.Models;
 namespace StudentInformationSystem.DAL.Repositories

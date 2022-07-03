@@ -1,16 +1,29 @@
 ﻿using StudentInformationSystem.BLL.DTOs;
-using StudentInformationSystem.DAL;
+using StudentInformationSystem.DAL.DataProviders;
+using StudentInformationSystem.DAL.Interfaces;
 using StudentInformationSystem.DAL.Models;
 
 namespace StudentInformationSystem.BLL
 {
+    public enum DataProviders
+    {
+        SQLEntityFramework,
+        SQLDapper,
+        MonkyDb
+    }
     public class Controller : IController
     {
-        private readonly UnitOfWork _repository;
+        private readonly IDataProvider _repository;
 
-        public Controller (bool inTestMode = false)
+        public Controller (DataProviders dataprovider, bool inTestMode = false)
         {
-            _repository = new UnitOfWork(inTestMode);
+            _repository = dataprovider switch
+            {
+                DataProviders.SQLEntityFramework => new SqlDataProviderEF(inTestMode),
+                DataProviders.SQLDapper => new SqlDataProviderDapper(inTestMode),
+                DataProviders.MonkyDb => new SqlDataProviderEF(inTestMode),
+                _ => null!,
+            };
         }
 
         public IDepartmentDto AddDepartment (string departmentName, string city)

@@ -1,11 +1,14 @@
 ﻿using StudentInformationSystem.BLL;
 using StudentInformationSystem.BLL.DTOs;
 
-var controller = new Controller(inTestMode: false );
+var controller = new Controller(
+    dataprovider: DataProviders.SQLDapper, 
+    inTestMode: true );
 
 var depo = controller.AddDepartment("CodeAcademy", "Klaipeda");
 
 var depoGet = controller.GetDepartments( );
+
 
 foreach (var dep in depoGet)
 {
