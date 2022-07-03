@@ -35,7 +35,7 @@ namespace StudentInformationSystem.DAL.DataProviders
         {
             get
             {
-                if (_lectureRepository == null) _lectureRepository = new LecturesRepository( );
+                if (_lectureRepository == null) _lectureRepository = new LecturesRepository(_context);
 
                 return _lectureRepository;
             }
@@ -45,14 +45,14 @@ namespace StudentInformationSystem.DAL.DataProviders
         {
             get
             {
-                if (_studentRepository == null) _studentRepository = new StudentRepository( );
+                if (_studentRepository == null) _studentRepository = new StudentRepository(_context);
                 return _studentRepository;
             }
         }
 
         public void Save ( )
         {
-            
+
         }
 
         #region Dispose methods
@@ -64,7 +64,7 @@ namespace StudentInformationSystem.DAL.DataProviders
             {
                 if (disposing)
                 {
-                    //_context.Dispose( );
+                    _context.Dispose( );
                 }
             }
             disposed = true;

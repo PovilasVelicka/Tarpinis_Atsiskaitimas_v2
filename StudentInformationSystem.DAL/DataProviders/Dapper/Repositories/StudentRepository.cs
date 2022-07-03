@@ -2,8 +2,16 @@
 
 namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
 {
+   
     internal class StudentRepository : IStudentRepository
     {
+        private readonly RepositoryDbContext _context;
+
+        public StudentRepository ( RepositoryDbContext context)
+        {
+            _context = context;
+        }
+
         public void AddOrUpdate (IStudentEntity student)
         {
             throw new NotImplementedException( );

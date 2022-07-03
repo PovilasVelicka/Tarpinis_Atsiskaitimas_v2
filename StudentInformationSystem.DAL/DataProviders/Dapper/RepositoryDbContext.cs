@@ -2,7 +2,7 @@
 
 namespace StudentInformationSystem.DAL.DataProviders.Dapper
 {
-    internal class RepositoryDbContext
+    internal class RepositoryDbContext:IDisposable
     {
         private readonly bool _inMemory;
 
@@ -24,5 +24,26 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper
         {
 
         }
+        #region Dispose methods
+        private bool disposed = false;
+
+        protected virtual void Dispose (bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    throw new Exception( );
+                }
+            }
+            disposed = true;
+        }
+
+        public void Dispose ( )
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

@@ -4,6 +4,13 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
 {
     internal class LecturesRepository : ILectureRepository
     {
+        private readonly RepositoryDbContext _context;
+
+        public LecturesRepository (RepositoryDbContext context)
+        {
+            _context = context;
+        }
+
         public void AddOrUpdate (ILectureEntity entity)
         {
             throw new NotImplementedException( );
