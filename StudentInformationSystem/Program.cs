@@ -5,7 +5,8 @@ var _controller = new Controller(
     inTestMode: true);
 
 
-
+// Mariau, jeigu gali pabandyk atlikti užduoti nežiūrėdamas į kodą
+// naudok _controller. man įdomu ar gausis suprasti.
 
 
 
@@ -110,11 +111,9 @@ void Tests ( )
 {
 
     AddDepartments( );
-
     AddLectures( );
     AddStudents( );
     AddLecturesToDepartment( );
-
     AddStudentToDepartment( );
     AddLectureToDepartmentWithStudents( );
     MoveStudetnToDepartment( );
