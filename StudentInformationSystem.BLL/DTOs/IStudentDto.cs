@@ -6,7 +6,7 @@
         string FirstName { get; }
         string LastName { get; }
         string PersonalCode { get; }
-        string DepartmentName { get; }
-        string DepartmenCity { get; }
+        string? DepartmentName { get; }
+        string? DepartmenCity { get; }
     }
 }

@@ -7,9 +7,5 @@
         public string LastName { get; set; }
         public string PersonalCode { get; set; }
         public int? DepartmentId { get; set; }
-
-        // List<ILectureEntity> Lectures { get; set; }
-        // IDepartmentEntity Department { get; set; }
-
     }
 }

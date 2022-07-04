@@ -2,7 +2,7 @@
 
 namespace StudentInformationSystem.DAL.DataProviders.Dapper
 {
-    internal class RepositoryDbContext:IDisposable
+    internal class RepositoryDbContext : IDisposable
     {
         private readonly bool _inMemory;
 

@@ -7,8 +7,5 @@ namespace StudentInformationSystem.DAL.Interfaces
         public int Id { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
-
-        // List<IStudentEntity> Students { get; set; }
-        // List<ILectureEntity> Lecture { get; set; }
     }
 }

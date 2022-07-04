@@ -5,6 +5,6 @@
         public IDepartmentRepository Departments { get; }
         public ILectureRepository Lectures { get; }
         public IStudentRepository Students { get; }
-        public void Save();
+        public void Save ( );
     }
 }

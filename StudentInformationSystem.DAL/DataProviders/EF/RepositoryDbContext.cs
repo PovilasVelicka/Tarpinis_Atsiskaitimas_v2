@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.DAL.Models;
+using System.Diagnostics;
+
 namespace StudentInformationSystem.DAL.DataProviders.EF
 {
     internal class RepositoryDbContext : DbContext
@@ -26,7 +28,7 @@ namespace StudentInformationSystem.DAL.DataProviders.EF
                 optionsBuilder.UseInMemoryDatabase("StudentsInfoSystem-prod");
             else
                 optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=StudentsInfoSystem-prod;Trusted_Connection=True;");
-
+            optionsBuilder.LogTo(message => Debug.WriteLine(message));
         }
     }
 }

@@ -4,7 +4,7 @@
 
 namespace StudentInformationSystem.DAL.Migrations
 {
-    public partial class createDb : Migration
+    public partial class CreateDatabse : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

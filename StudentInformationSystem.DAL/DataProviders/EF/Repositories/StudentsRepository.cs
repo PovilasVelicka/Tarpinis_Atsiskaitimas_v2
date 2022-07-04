@@ -27,7 +27,7 @@ namespace StudentInformationSystem.DAL.Repositories
 
         public IQueryable<IStudentEntity> GetAll ( )
         {
-            return _context.Students.AsNoTracking( );
+            return _context.Students.Include(d => d.Department).AsNoTracking( );
         }
 
         public IQueryable<IStudentEntity> GetAllByFirstName (string firstNameSubstring)

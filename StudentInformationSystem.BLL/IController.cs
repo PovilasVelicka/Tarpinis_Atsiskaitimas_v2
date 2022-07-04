@@ -4,21 +4,23 @@ namespace StudentInformationSystem.BLL
 {
     internal interface IController
     {
-        ILectureDto AddLecture (string title);
+        ILectureDto CreateLectrue (string title);
         void AddLectureTo (ILectureDto lecture, IDepartmentDto department);
         ILectureDto GetLectureById (int id);
+        List<ILectureDto> GetLectures ();
+        List<ILectureDto> GetLectures (string lectureNameSubstring);
         List<IStudentDto> GetStudentsByDepartmentId (int departmentId);
         List<ILectureDto> GetLecturesByDepartmentId (int departmentId);
         List<ILectureDto> GetLecturesByStudentId (int studentId);
 
 
-        IDepartmentDto AddDepartment (string departmentName, string city);
+        IDepartmentDto CreateDepartment (string departmentName, string city);
         IDepartmentDto GetDepartmentById (int departmentId);
         List<IDepartmentDto> GetDepartments ( );
         List<IDepartmentDto> GetDepartments (string departmentNameSubstring);
 
 
-        IStudentDto AddStudent (string firstName, string lastName, string personalCode);
+        IStudentDto CreateStudent (string firstName, string lastName, string personalCode);
         void AddStudentTo (IStudentDto student, IDepartmentDto studentDto);
         IStudentDto GetStudentById (int id);
         List<IStudentDto> GetStudents ( );

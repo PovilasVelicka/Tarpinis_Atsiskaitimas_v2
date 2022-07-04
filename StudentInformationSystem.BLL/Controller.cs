@@ -26,7 +26,7 @@ namespace StudentInformationSystem.BLL
             };
         }
 
-        public IDepartmentDto AddDepartment (string departmentName, string city)
+        public IDepartmentDto CreateDepartment (string departmentName, string city)
         {
             var departmentEntity = _repository
                 .Departments
@@ -43,7 +43,7 @@ namespace StudentInformationSystem.BLL
             return GetDepartmentById(departmentEntity.Id);
         }
 
-        public ILectureDto AddLecture (string title)
+        public ILectureDto CreateLectrue (string title)
         {
             var lecture = _repository.Lectures.GetAllByName(title).FirstOrDefault( );
             if (lecture == null)
@@ -73,7 +73,7 @@ namespace StudentInformationSystem.BLL
 
         }
 
-        public IStudentDto AddStudent (string firstName, string lastName, string personalCode)
+        public IStudentDto CreateStudent (string firstName, string lastName, string personalCode)
         {
             var studentEntity = _repository.Students.GetByPersonalCode(personalCode);
             if (studentEntity == null)
@@ -139,17 +139,20 @@ namespace StudentInformationSystem.BLL
 
         public List<IStudentDto> GetStudents ( )
         {
-            var result = from student in _repository.Students.GetAll( )
-                         join depo in _repository.Departments.GetAll( ) on student.DepartmentId equals depo.Id
-                         select new StudentDto
-                         {
-                             Id = student.Id,
-                             FirstName = student.FirstName,
-                             LastName = student.LastName,
-                             PersonalCode = student.PersonalCode,
-                             DepartmentName = depo.Name,
-                             DepartmenCity = depo.City,
-                         };
+            var result = _repository
+                .Students
+                .GetAll( )
+                .Select(x => (Student)x)
+                .Select(x => new StudentDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    PersonalCode = x.PersonalCode,
+                    DepartmentName = x.Department!.Name,
+                    DepartmenCity = x.Department!.City,
+                }); ;
+
             return result.ToList<IStudentDto>( );
         }
 
@@ -259,6 +262,33 @@ namespace StudentInformationSystem.BLL
                      Name = d.Name,
                      City = d.City
                  });
+        }
+
+        public List<ILectureDto> GetLectures ( )
+        {
+            return _repository
+                .Lectures
+                .GetAll( )
+                .Select(l => new LectureDto
+                {
+                    Id = l.Id,
+                    Title = l.Title,
+                })
+                .ToList<ILectureDto>( );
+        }
+
+        public List<ILectureDto> GetLectures (string lectureNameSubstring)
+        {
+            return _repository
+            .Lectures
+            .GetAll( )
+            .Where(l => l.Title.ToLower( ).Equals(lectureNameSubstring.ToLower( )))
+            .Select(l => new LectureDto
+            {
+                Id = l.Id,
+                Title = l.Title,
+            })
+            .ToList<ILectureDto>( );
         }
     }
 }

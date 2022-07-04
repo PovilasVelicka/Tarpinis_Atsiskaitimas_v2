@@ -2,12 +2,12 @@
 
 namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
 {
-   
+
     internal class StudentRepository : IStudentRepository
     {
         private readonly RepositoryDbContext _context;
 
-        public StudentRepository ( RepositoryDbContext context)
+        public StudentRepository (RepositoryDbContext context)
         {
             _context = context;
         }

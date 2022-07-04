@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
-[assembly:InternalsVisibleTo("StudentInformationSystem.BLL")]
+[assembly: InternalsVisibleTo("StudentInformationSystem.BLL")]
 
 namespace StudentInformationSystem.DAL.Models
 {
-    [Table("Departments",Schema ="InfoSystem")]
+    [Table("Departments", Schema = "InfoSystem")]
     internal class Department : IDepartmentEntity
     {
         [Key]
@@ -22,14 +22,14 @@ namespace StudentInformationSystem.DAL.Models
 
         public virtual List<Student> Students { get; set; } = null!;
         public virtual List<Lecture> Lectures { get; set; } = null!;
-        private Department() { }
+        private Department ( ) { }
 
-        public Department(string name, string city)
+        public Department (string name, string city)
         {
             Name = name;
             City = city;
-            Students = new List<Student>();
-            Lectures = new List<Lecture>();
+            Students = new List<Student>( );
+            Lectures = new List<Lecture>( );
         }
     }
 }

@@ -12,8 +12,8 @@ using StudentInformationSystem.DAL.DataProviders.EF;
 namespace StudentInformationSystem.DAL.Migrations
 {
     [DbContext(typeof(RepositoryDbContext))]
-    [Migration("20220702202249_testMode")]
-    partial class testMode
+    [Migration("20220704053839_CreateDatabse")]
+    partial class CreateDatabse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
