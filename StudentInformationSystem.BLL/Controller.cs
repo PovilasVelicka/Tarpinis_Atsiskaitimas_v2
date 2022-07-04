@@ -88,9 +88,9 @@ namespace StudentInformationSystem.BLL
         {
             var studentEntity = (Student)_repository.Students.GetById(student.Id);
             var departmentEntity = (Department)_repository.Departments.GetById(department.Id);
-
-            studentEntity.Department = departmentEntity;
             studentEntity.Lectures.Clear( );
+
+            studentEntity.Department = departmentEntity;            
             studentEntity.Lectures.AddRange(departmentEntity.Lectures);
             _repository.Save( );
         }

@@ -39,7 +39,7 @@ var _controller = new Controller(
 
 
 
-
+StartPresentation( );
 
 #region Presentation
 
@@ -49,6 +49,7 @@ void StartPresentation ( )
     Thread.Sleep(5000);
     Console.CursorVisible = false;
     PrintNeo( );
+    
     About( );
     Tests( );
     Console.ReadLine( );
@@ -80,14 +81,15 @@ void PrintNeo ( )
 
 void About ( )
 {
+    Console.Clear( );
     Console.ForegroundColor = ConsoleColor.White;
-    PrintWords("              Tema: DB tarpinis atsiskaitymas");
-    PrintWords("         Studentas: Povilas Velička");
-    PrintWords($"Atsiskaitymo data: {DateTime.Now.ToLongDateString( )}");
+    PrintChars("                  Tema: DB tarpinis atsiskaitymas");
+    PrintChars("             Studentas: Povilas Velička");
+    PrintChars($"     Atsiskaitymo data: {DateTime.Now.ToLongDateString( )}");
     printCursor(4);
     Console.WriteLine("\n");
     Console.ForegroundColor = ConsoleColor.Green;
-    PrintChars("    Šiam darbui atlikti, nuadomamas Entity FrameWork Core Model first metodas. Programa suskaidyta į 4 sluoksnius:");
+    PrintChars("    Šiam darbui atlikti, nuadomamas Entity FrameWork Core, Model first metodas. Programa suskaidyta į 4 sluoksnius:");
     Console.ForegroundColor = ConsoleColor.White;
     PrintChars("1. DAL - Data Access Layer");
     PrintChars("2. BLL - Business Logic Layer");
@@ -98,6 +100,7 @@ void About ( )
     Console.WriteLine("\n\n");
     Console.ForegroundColor = ConsoleColor.Green;
     PrintChars("    Dabar ataliksiu kelėtą testų įrašant ir patikrinant įvestus duomenys");
+    Console.WriteLine( ) ;
     printCursor(2);
     Console.ForegroundColor = ConsoleColor.White;
 
@@ -307,7 +310,9 @@ void AddLectureToDepartmentWithStudents ( )
     var depo = _controller.GetDepartmentById(1);
 
     _controller.AddLectureTo(lecture, depo);
+    Console.WriteLine();
     PrintChars($"Paskaita įtraukta į padalinį pavadinimas: {depo.Name}");
+    Console.WriteLine();
     PrintChars("3. O dabar patikrinsiu ar paskaita prisidėjo studentams esanteims padalinyje su ID = 1:");
     var depoStudents = _controller.GetStudentsByDepartmentId(depo.Id);
     Console.WriteLine( );
@@ -335,8 +340,10 @@ void MoveStudetnToDepartment ( )
     var depo = _controller.GetDepartmentById(2);
     Console.WriteLine( );
     PrintChars($"Studentas {student.FirstName}, a/k {student.PersonalCode}, perkeltas į padalinį {depo.Name}");
-
+    _controller.AddStudentTo(student, depo);
+    Console.WriteLine();
     PrintChars("2. Tikrinam ar studentui prisiskyrė paskaitos:");
+    Console.WriteLine();
     foreach (var lectur in _controller.GetLecturesByStudentId(student.Id))
     {
         Console.WriteLine(String.Format("    Id: {0,-3} Title: {1,-30}", lectur.Id, lectur.Title));
@@ -349,7 +356,7 @@ void PrintChars (string text)
     foreach (var nextChar in text.ToCharArray( ))
     {
         Console.Write(nextChar);
-        Thread.Sleep(50);
+        Thread.Sleep(1);
     }
 }
 
