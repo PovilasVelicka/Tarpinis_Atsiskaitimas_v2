@@ -90,7 +90,7 @@ void About ( )
     printCursor(4);
     Console.WriteLine("\n");
     Console.ForegroundColor = ConsoleColor.Green;
-    PrintChars("    Šiam darbui atlikti, nuadomamas Entity FrameWork Core, Model first metodas. Programa suskaidyta į 4 sluoksnius:");
+    PrintChars("    Šiam darbui atlikti, naudojau Entity FrameWork Core, Model first metodas. Programa suskaidyta į 4 sluoksnius:");
     Console.ForegroundColor = ConsoleColor.White;
     PrintChars("1. DAL - Data Access Layer");
     PrintChars("2. BLL - Business Logic Layer");
@@ -211,13 +211,16 @@ void AddLecturesToDepartment ( )
     PrintChars("    TEST - Esamų paskaitų priskirimas departmentui:");
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine( );
-    PrintChars("1. Sukurtos paskaitos nepriklauso nei vinam departmentui, todėl naudojant komandą AddLectureTo, priskirsiu po trys paskaitas kiekvienam departmentui:");
+    PrintChars("1. Sukurtos paskaitos nepriklauso nei vinam departmentui, todėl naudojant komandą AddLectureTo, ");
+    PrintChars("   priskirsiu po trys paskaitas kiekvienam departmentui, ");
+    PrintChars("   o pirmą pasiakitą įvesiu abiems departmentams:");
     Console.WriteLine( );
 
     var departments = _controller.GetDepartments( );
     var lectures = _controller.GetLectures( );
     for (int i = 0; i < lectures.Count; i++)
     {
+        if(i==0) _controller.AddLectureTo(lectures[i], departments[1]);
         if (i < 3)
             _controller.AddLectureTo(lectures[i], departments[0]);
         else
