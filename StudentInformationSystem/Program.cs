@@ -50,11 +50,12 @@ void StartPresentation ( )
     Thread.Sleep(5000);
     Console.CursorVisible = false;
     PrintNeo( );
-    
+
     About( );
     Tests( );
     Console.ReadLine( );
     clearMatrix( );
+    Console.Clear( );
     Console.ReadLine( );
 }
 
@@ -62,19 +63,19 @@ void PrintNeo ( )
 {
     Console.ForegroundColor = ConsoleColor.Green;
     Console.CursorVisible = false;
-    PrintChars("Wake up, Neo...");
+    PrintChars("    Wake up, Neo...");
     printCursor(5);
     Console.Clear( );
 
-    PrintChars("The matrix has You...");
+    PrintChars("    The matrix has You...");
     printCursor(5);
     Console.Clear( );
 
-    PrintChars("Follow the white rabbit.");
+    PrintChars("    Follow the white rabbit.");
     printCursor(2);
     Console.WriteLine("\n");
 
-    PrintWords("Knock, knock, Neo.");
+    PrintWords("    Knock, knock, Neo.");
     Thread.Sleep(3000);
     Console.WriteLine( );
 
@@ -101,7 +102,7 @@ void About ( )
     Console.WriteLine("\n\n");
     Console.ForegroundColor = ConsoleColor.Green;
     PrintChars("    Dabar ataliksiu kelėtą testų įrašant ir patikrinant įvestus duomenys");
-    Console.WriteLine( ) ;
+    Console.WriteLine( );
     printCursor(2);
     Console.ForegroundColor = ConsoleColor.White;
 
@@ -220,7 +221,7 @@ void AddLecturesToDepartment ( )
     var lectures = _controller.GetLectures( );
     for (int i = 0; i < lectures.Count; i++)
     {
-        if(i==0) _controller.AddLectureTo(lectures[i], departments[1]);
+        if (i == 0) _controller.AddLectureTo(lectures[i], departments[1]);
         if (i < 3)
             _controller.AddLectureTo(lectures[i], departments[0]);
         else
@@ -307,14 +308,16 @@ void AddLectureToDepartmentWithStudents ( )
     var lecture = _controller.CreateLectrue("Programuotojų darbas Lietuvoje");
     Console.WriteLine( );
     PrintChars("Paskaita įvesta");
+    printCursor(4);
     Console.WriteLine( );
     PrintChars("2. Naudojant komandą AddLectureTo įtrauksiu paskaitą į padalinį su ID = 1:");
     var depo = _controller.GetDepartmentById(1);
 
     _controller.AddLectureTo(lecture, depo);
-    Console.WriteLine();
+    Console.WriteLine( );
     PrintChars($"Paskaita įtraukta į padalinį pavadinimas: {depo.Name}");
-    Console.WriteLine();
+    Console.WriteLine( );
+    printCursor(4);
     PrintChars("3. O dabar patikrinsiu ar paskaita prisidėjo studentams esanteims padalinyje su ID = 1:");
     var depoStudents = _controller.GetStudentsByDepartmentId(depo.Id);
     Console.WriteLine( );
@@ -327,6 +330,7 @@ void AddLectureToDepartmentWithStudents ( )
             Console.WriteLine(String.Format("    ----Id: {0,-3} Title: {1,-30}", lectureItem.Id, lectureItem.Title));
         }
     }
+    printCursor(4);
 }
 
 void MoveStudetnToDepartment ( )
@@ -343,9 +347,9 @@ void MoveStudetnToDepartment ( )
     Console.WriteLine( );
     PrintChars($"Studentas {student.FirstName}, a/k {student.PersonalCode}, perkeltas į padalinį {depo.Name}");
     _controller.AddStudentTo(student, depo);
-    Console.WriteLine();
+    Console.WriteLine( );
     PrintChars("2. Tikrinam ar studentui prisiskyrė paskaitos:");
-    Console.WriteLine();
+    Console.WriteLine( );
     foreach (var lectur in _controller.GetLecturesByStudentId(student.Id))
     {
         Console.WriteLine(String.Format("    Id: {0,-3} Title: {1,-30}", lectur.Id, lectur.Title));
