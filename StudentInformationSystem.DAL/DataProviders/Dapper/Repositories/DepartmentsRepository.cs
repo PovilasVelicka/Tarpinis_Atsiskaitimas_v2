@@ -57,7 +57,7 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
             Department depo;
             using (var reader = GetMultiple(GET_BY_ID, new { depo_id = id }))
             {
-                depo = reader.ReadSingle<Department>( );
+                depo = reader.Read<Department>( ).Single();
                 depo.Students = reader.Read<Student>( ).ToList( );
                 depo.Lectures = reader.Read<Lecture>( ).ToList( );                              
             }
