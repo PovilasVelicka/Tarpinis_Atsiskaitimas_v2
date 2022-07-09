@@ -381,6 +381,8 @@ void printCursor (int count)
     var cursorSimbol = " #";
     var curPosition = Console.GetCursorPosition( );
 
+      
+
     for (int i = 0; i < count; i++)
     {
         Console.SetCursorPosition(curPosition.Left, curPosition.Top);

@@ -17,17 +17,17 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
             throw new NotImplementedException( );
         }
 
-        public IQueryable<ILectureEntity> GetAll ( )
+        public IEnumerable<ILectureEntity> GetAll ( )
         {
             throw new NotImplementedException( );
         }
 
-        public IQueryable<ILectureEntity> GetAllByName (string nameSubstring)
+        public IEnumerable<ILectureEntity> GetAllByName (string nameSubstring)
         {
             throw new NotImplementedException( );
         }
 
-        public IQueryable<ILectureEntity> GetByDepartmentId (int departmentId)
+        public IEnumerable<ILectureEntity> GetByDepartmentId (int departmentId)
         {
             throw new NotImplementedException( );
         }
@@ -37,7 +37,7 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
             throw new NotImplementedException( );
         }
 
-        public IQueryable<ILectureEntity> GetByStudentId (int studentId)
+        public IEnumerable<ILectureEntity> GetByStudentId (int studentId)
         {
             throw new NotImplementedException( );
         }

@@ -3,10 +3,10 @@
     public interface ILectureRepository
     {
         ILectureEntity GetById (int id);
-        IQueryable<ILectureEntity> GetByDepartmentId (int departmentId);
-        IQueryable<ILectureEntity> GetByStudentId (int studentId);
-        IQueryable<ILectureEntity> GetAllByName (string nameSubstring);
-        IQueryable<ILectureEntity> GetAll ( );
+        IEnumerable<ILectureEntity> GetByDepartmentId (int departmentId);
+        IEnumerable<ILectureEntity> GetByStudentId (int studentId);
+        IEnumerable<ILectureEntity> GetAllByName (string nameSubstring);
+        IEnumerable<ILectureEntity> GetAll ( );
         void AddOrUpdate (ILectureEntity entity);
         void Remove (ILectureEntity entity);
     }

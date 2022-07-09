@@ -4,9 +4,9 @@
     {
         IStudentEntity GetById (int id);
         IStudentEntity? GetByPersonalCode (string personalCode);
-        IQueryable<IStudentEntity> GetAll ( );
-        IQueryable<IStudentEntity> GetAllByFirstName (string firstName);
-        IQueryable<IStudentEntity> GetAllByLastName (string lastName);
+        IEnumerable<IStudentEntity> GetAll ( );
+        IEnumerable<IStudentEntity> GetAllByFirstName (string firstName);
+        IEnumerable<IStudentEntity> GetAllByLastName (string lastName);
         void AddOrUpdate (IStudentEntity student);
         void Remove (IStudentEntity student);
     }
