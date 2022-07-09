@@ -1,31 +1,29 @@
-﻿using StudentInformationSystem.DAL.DataProviders.Dapper;
-using StudentInformationSystem.DAL.DataProviders.Dapper.Repositories;
+﻿using StudentInformationSystem.DAL.DataProviders.Dapper.Repositories;
 using StudentInformationSystem.DAL.Interfaces;
+using System.Data.SqlClient;
 namespace StudentInformationSystem.DAL.DataProviders
 {
     public class SqlDataProviderDapper : IDataProvider
     {
-
-        private readonly RepositoryDbContext _context;
-        private IDepartmentRepository _departmentRepository = null!;
-        private ILectureRepository _lectureRepository = null!;
-        private IStudentRepository _studentRepository = null!;
-
-        public SqlDataProviderDapper ( )
-        {
-            _context = new(inTestMode: false);
-        }
-
+        private const string CONNECTION_STRING = @"Server=localhost\SQLEXPRESS;Database=StudentsInfoSystem-prod;Trusted_Connection=True;";
+        private readonly SqlConnection _context = null!;
+        private DepartmentsRepository _departmentRepository = null!;
+        private  LecturesRepository _lecturesRepository = null!;
+        private  StudentRepository _studentRepository = null!;
         public SqlDataProviderDapper (bool inTestMode)
         {
-            _context = new(inTestMode);
+            _context = new SqlConnection(CONNECTION_STRING);
+            _context.Open( );
         }
 
         public IDepartmentRepository Departments
         {
             get
             {
-                if (_departmentRepository == null) _departmentRepository = new DepartmentsRepository(_context);
+                if (_departmentRepository == null)
+                {
+                    _departmentRepository = new(_context);
+                }
 
                 return _departmentRepository;
             }
@@ -35,9 +33,12 @@ namespace StudentInformationSystem.DAL.DataProviders
         {
             get
             {
-                if (_lectureRepository == null) _lectureRepository = new LecturesRepository(_context);
+                if(_lecturesRepository == null)
+                {
+                    _lecturesRepository = new(_context);
+                }
 
-                return _lectureRepository;
+                return _lecturesRepository;
             }
         }
 
@@ -45,14 +46,18 @@ namespace StudentInformationSystem.DAL.DataProviders
         {
             get
             {
-                if (_studentRepository == null) _studentRepository = new StudentRepository(_context);
+                if (_studentRepository == null)
+                {
+                    _studentRepository = new(_context);
+                }
+
                 return _studentRepository;
             }
         }
 
         public void Save ( )
         {
-
+            throw new NotImplementedException( );
         }
 
         #region Dispose methods

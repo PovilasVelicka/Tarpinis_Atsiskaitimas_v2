@@ -1,13 +1,14 @@
 ﻿using StudentInformationSystem.DAL.Interfaces;
+using System.Data;
 
 namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
 {
 
     internal class StudentRepository : IStudentRepository
     {
-        private readonly RepositoryDbContext _context;
+        private readonly IDbConnection _context;
 
-        public StudentRepository (RepositoryDbContext context)
+        public StudentRepository (IDbConnection context)
         {
             _context = context;
         }
