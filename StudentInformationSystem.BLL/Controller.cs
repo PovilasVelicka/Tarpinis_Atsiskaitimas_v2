@@ -249,7 +249,7 @@ namespace StudentInformationSystem.BLL
             };
         }
 
-        private IQueryable<IDepartmentDto> GetAllDepartments ( )
+        private IEnumerable<IDepartmentDto> GetAllDepartments ( )
         {
             return
              _repository

@@ -1,33 +1,29 @@
 ﻿using StudentInformationSystem.DAL.Interfaces;
 using System.Data;
+using Dapper;
 
 namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
 {
-    internal class DepartmentsRepository : IDepartmentRepository
+    internal class DepartmentsRepository : BaseRepository<IDepartmentEntity>, IDepartmentRepository
     {
-        private readonly IDbConnection _context;
-
-        public DepartmentsRepository (IDbConnection context)
-        {
-            _context = context;
-        }
+        public DepartmentsRepository (IDbConnection dbConnection) : base(dbConnection) { }     
 
         public void AddOrUpdate (IDepartmentEntity entity)
         {
             throw new NotImplementedException( );
         }
 
-        public IQueryable<IDepartmentEntity> GetAll ( )
+        public IEnumerable<IDepartmentEntity> GetAll ( )
+        {
+            return base.Get("", "");
+        }
+
+        public IEnumerable<IDepartmentEntity> GetAllByCity (string citySubstring)
         {
             throw new NotImplementedException( );
         }
 
-        public IQueryable<IDepartmentEntity> GetAllByCity (string citySubstring)
-        {
-            throw new NotImplementedException( );
-        }
-
-        public IQueryable<IDepartmentEntity> GetAllByName (string nameSubstring)
+        public IEnumerable<IDepartmentEntity> GetAllByName (string nameSubstring)
         {
             throw new NotImplementedException( );
         }

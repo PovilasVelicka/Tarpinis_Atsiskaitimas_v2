@@ -1,8 +1,8 @@
 ﻿using StudentInformationSystem.BLL;
 
 var _controller = new Controller(
-    dataprovider: DataProviders.SQLDapper,
-    inTestMode: true);
+    dataprovider: DataProviders.SQLEntityFramework,
+    inTestMode: false);
 
 
 // Mariau, jeigu gali pabandyk atlikti užduoti nežiūrėdamas į kodą
