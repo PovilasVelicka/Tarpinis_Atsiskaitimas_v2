@@ -1,7 +1,7 @@
 ﻿using StudentInformationSystem.BLL;
 
 var _controller = new Controller(
-    dataprovider: DataProviders.SQLEntityFramework,
+    dataprovider: DataProviders.SQLDapper,
     inTestMode: false);
 
 
@@ -130,9 +130,11 @@ void AddDepartments ( )
     Console.WriteLine( );
     Console.WriteLine(String.Format("    Id: {0,-3} Name: {1,-30} City: {2} ", "***", "CodeAcademy Klaipėdos filialas", "Klaipėda"));
     Console.WriteLine(String.Format("    Id: {0,-3} Name: {1,-30} City: {2} ", "***", "CodeAcademy Kauno filialas", "Kaunas"));
+    Console.WriteLine(String.Format("    Id: {0,-3} Name: {1,-30} City: {2} ", "***", "Dapper CodeAcademy Kauno filialas", "Kaunas"));
     printCursor(4);
     _controller.CreateDepartment("CodeAcademy Klaipėdos filialas", "Klaipėda");
     _controller.CreateDepartment("CodeAcademy Kauno filialas", "Kaunas");
+    _controller.CreateDepartment("Dapper CodeAcademy Kauno filialas", "Kaunas");
     Console.WriteLine( );
 
     PrintChars("2. Naudojant komandą GetDepartments atliksiu įvestu duomenų patikrinimą");
@@ -310,15 +312,16 @@ void AddLectureToDepartmentWithStudents ( )
     PrintChars("Paskaita įvesta");
     printCursor(4);
     Console.WriteLine( );
-    PrintChars("2. Naudojant komandą AddLectureTo įtrauksiu paskaitą į padalinį su ID = 1:");
-    var depo = _controller.GetDepartmentById(1);
+    var testDepoId = _controller.GetDepartments( ).First( ).Id;
+    PrintChars($"2. Naudojant komandą AddLectureTo įtrauksiu paskaitą į padalinį su ID = {testDepoId}:");
+    var depo = _controller.GetDepartmentById(testDepoId);
 
     _controller.AddLectureTo(lecture, depo);
     Console.WriteLine( );
     PrintChars($"Paskaita įtraukta į padalinį pavadinimas: {depo.Name}");
     Console.WriteLine( );
     printCursor(4);
-    PrintChars("3. O dabar patikrinsiu ar paskaita prisidėjo studentams esanteims padalinyje su ID = 1:");
+    PrintChars($"3. O dabar patikrinsiu ar paskaita prisidėjo studentams esanteims padalinyje su ID = {testDepoId}:");
     var depoStudents = _controller.GetStudentsByDepartmentId(depo.Id);
     Console.WriteLine( );
     foreach (var studentItem in depoStudents)
@@ -339,11 +342,12 @@ void MoveStudetnToDepartment ( )
     PrintChars("    TEST - Perkelti studentą į kitą padalinį:");
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine( );
-
-    PrintChars("1. O dabar perkeliu studenta SU ID 1 į padalinį su ID 2:");
+    var testDepoId = _controller.GetDepartments( ).Last( ).Id;
+    var testStudentId = _controller.GetStudents( ).First( ).Id;
+    PrintChars($"1. O dabar perkeliu studenta SU ID {testStudentId} į padalinį su ID {testDepoId}:");
     Console.WriteLine( );
-    var student = _controller.GetStudentById(1);
-    var depo = _controller.GetDepartmentById(2);
+    var student = _controller.GetStudentById(testStudentId);
+    var depo = _controller.GetDepartmentById(testDepoId);
     Console.WriteLine( );
     PrintChars($"Studentas {student.FirstName}, a/k {student.PersonalCode}, perkeltas į padalinį {depo.Name}");
     _controller.AddStudentTo(student, depo);

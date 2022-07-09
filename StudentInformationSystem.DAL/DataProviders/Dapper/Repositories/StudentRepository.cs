@@ -18,17 +18,17 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
             throw new NotImplementedException( );
         }
 
-        public IEnumerable<IStudentEntity> GetAll ( )
+        public IQueryable<IStudentEntity> GetAll ( )
         {
             throw new NotImplementedException( );
         }
 
-        public IEnumerable<IStudentEntity> GetAllByFirstName (string firstName)
+        public IQueryable<IStudentEntity> GetAllByFirstName (string firstName)
         {
             throw new NotImplementedException( );
         }
 
-        public IEnumerable<IStudentEntity> GetAllByLastName (string lastName)
+        public IQueryable<IStudentEntity> GetAllByLastName (string lastName)
         {
             throw new NotImplementedException( );
         }

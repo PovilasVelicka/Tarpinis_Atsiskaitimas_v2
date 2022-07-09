@@ -34,18 +34,18 @@ namespace StudentInformationSystem.DAL.Repositories
                 .Single(i => i.Id == id);
         }
 
-        public IEnumerable<ILectureEntity> GetAllByName (string nameSubstring)
+        public IQueryable<ILectureEntity> GetAllByName (string nameSubstring)
         {
             return GetAll( )
                 .Where(n => n.Title.ToLower( ).Contains(nameSubstring.ToLower( )));
         }
 
-        public IEnumerable<ILectureEntity> GetAll ( )
+        public IQueryable<ILectureEntity> GetAll ( )
         {
             return _context.Lectures.AsNoTracking( );
         }
 
-        public IEnumerable<ILectureEntity> GetByDepartmentId (int departmentId)
+        public IQueryable<ILectureEntity> GetByDepartmentId (int departmentId)
         {
             return _context
                 .Lectures
@@ -53,7 +53,7 @@ namespace StudentInformationSystem.DAL.Repositories
                 .AsNoTracking( );
         }
 
-        public IEnumerable<ILectureEntity> GetByStudentId (int studentId)
+        public IQueryable<ILectureEntity> GetByStudentId (int studentId)
         {
             return _context
                 .Lectures

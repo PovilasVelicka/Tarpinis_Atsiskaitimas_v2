@@ -24,18 +24,18 @@ namespace StudentInformationSystem.DAL.Repositories
             _context.SaveChanges( );
         }
 
-        public IEnumerable<IDepartmentEntity> GetAll ( )
+        public IQueryable<IDepartmentEntity> GetAll ( )
         {
             return _context.Departments.AsNoTracking( );
         }
 
-        public IEnumerable<IDepartmentEntity> GetAllByCity (string city)
+        public IQueryable<IDepartmentEntity> GetAllByCity (string city)
         {
             return GetAll( )
                 .Where(x => x.City.ToLower( ).Contains(city.ToLower( )));
         }
 
-        public IEnumerable<IDepartmentEntity> GetAllByName (string name)
+        public IQueryable<IDepartmentEntity> GetAllByName (string name)
         {
             return GetAll( )
                 .Where(n => n.Name.ToLower( ).Contains(name.ToLower( )));

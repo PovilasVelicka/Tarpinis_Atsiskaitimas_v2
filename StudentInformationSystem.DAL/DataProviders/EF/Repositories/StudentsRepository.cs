@@ -25,18 +25,18 @@ namespace StudentInformationSystem.DAL.Repositories
             _context.SaveChanges( );
         }
 
-        public IEnumerable<IStudentEntity> GetAll ( )
+        public IQueryable<IStudentEntity> GetAll ( )
         {
             return _context.Students.Include(d => d.Department).AsNoTracking( );
         }
 
-        public IEnumerable<IStudentEntity> GetAllByFirstName (string firstNameSubstring)
+        public IQueryable<IStudentEntity> GetAllByFirstName (string firstNameSubstring)
         {
             return GetAll( )
                 .Where(n => n.FirstName.ToLower( ).Contains(firstNameSubstring.ToLower( )));
         }
 
-        public IEnumerable<IStudentEntity> GetAllByLastName (string lastNameSubstring)
+        public IQueryable<IStudentEntity> GetAllByLastName (string lastNameSubstring)
         {
             return GetAll( )
                 .Where(n => n.LastName.ToLower( ).Contains(lastNameSubstring.ToLower( )));

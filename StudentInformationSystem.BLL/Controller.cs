@@ -136,7 +136,8 @@ namespace StudentInformationSystem.BLL
                     })
                 .ToList<ILectureDto>( );
         }
-
+        
+        
         public List<IStudentDto> GetStudents ( )
         {
             var result = _repository
@@ -249,7 +250,7 @@ namespace StudentInformationSystem.BLL
             };
         }
 
-        private IEnumerable<IDepartmentDto> GetAllDepartments ( )
+        private IQueryable<IDepartmentDto> GetAllDepartments ( )
         {
             return
              _repository
