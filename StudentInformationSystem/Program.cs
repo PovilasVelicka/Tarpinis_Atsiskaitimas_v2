@@ -4,7 +4,7 @@ var _controller = new Controller(
     dataprovider: DataProviders.SQLDapper,
     inTestMode: false);
 
-
+var student = _controller.GetStudents(firstNameSubstring: "Vard", lastNameSubstring: "Pav");
 // Mariau, jeigu gali pabandyk atlikti užduoti nežiūrėdamas į kodą
 // naudok _controller. man įdomu ar gausis suprasti.
 
@@ -47,11 +47,11 @@ StartPresentation( );
 
 void StartPresentation ( )
 {
-    Thread.Sleep(5000);
-    Console.CursorVisible = false;
-    PrintNeo( );
+    //Thread.Sleep(5000);
+    //Console.CursorVisible = false;
+    //PrintNeo( );
 
-    About( );
+   // About( );
     Tests( );
     Console.ReadLine( );
     clearMatrix( );
@@ -366,7 +366,7 @@ void PrintChars (string text)
     foreach (var nextChar in text.ToCharArray( ))
     {
         Console.Write(nextChar);
-        Thread.Sleep(1);
+        //Thread.Sleep(1);
     }
 }
 
@@ -376,7 +376,7 @@ void PrintWords (string text)
     foreach (var word in text.Split(new char[ ] { ' ' }))
     {
         Console.Write(word + " ");
-        Thread.Sleep(250);
+        //Thread.Sleep(250);
     }
 }
 
@@ -391,10 +391,10 @@ void printCursor (int count)
     {
         Console.SetCursorPosition(curPosition.Left, curPosition.Top);
         Console.Write(cursorSimbol);
-        Thread.Sleep(500);
+       // Thread.Sleep(500);
         Console.SetCursorPosition(curPosition.Left, curPosition.Top);
         Console.Write(new string(' ', cursorSimbol.Length));
-        Thread.Sleep(500);
+        //Thread.Sleep(500);
     }
     Console.SetCursorPosition(curPosition.Left, curPosition.Top);
     Console.Write(new string(' ', cursorSimbol.Length));

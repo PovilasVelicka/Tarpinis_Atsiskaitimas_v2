@@ -6,6 +6,7 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
     public class BaseRepository<TEntity> where TEntity : class
     {
         private readonly IDbConnection _connection;
+        protected IDbConnection Connection { get { return _connection; } }
         protected BaseRepository (IDbConnection dbConnection)
         {
             _connection = dbConnection;

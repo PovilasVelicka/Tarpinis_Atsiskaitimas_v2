@@ -28,7 +28,7 @@ namespace StudentInformationSystem.DAL.Models
         [StringLength(11)]
         public string PersonalCode { get; set; } = null!;
 
-        public virtual List<Lecture> Lectures { get; set; } = null!;
+        public virtual List<Lecture> Lectures { get; set; } = new List<Lecture>( );
 
         public int? DepartmentId { get; set; } = null!;
 
@@ -40,8 +40,7 @@ namespace StudentInformationSystem.DAL.Models
         {
             FirstName = firstName;
             LastName = lastName;
-            PersonalCode = personalCode;
-            Lectures = new List<Lecture>( );
+            PersonalCode = personalCode;         
         }
     }
 }

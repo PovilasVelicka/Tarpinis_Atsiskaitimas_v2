@@ -6,7 +6,7 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
 {
     internal class DepartmentsRepository : BaseRepository<Department>, IDepartmentRepository
     {
-        private const string SELECT_ALL =   @"SELECT * FROM [InfoSystem].[Departments] ";
+        private const string SELECT_ALL = @"SELECT * FROM [InfoSystem].[Departments] ";
 
         private const string GET_BY_ID = @" select * from InfoSystem.Departments where Id= @depo_id
                                             select * from InfoSystem.Students where DepartmentId = @depo_id
@@ -57,9 +57,9 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
             Department depo;
             using (var reader = GetMultiple(GET_BY_ID, new { depo_id = id }))
             {
-                depo = reader.Read<Department>( ).Single();
+                depo = reader.Read<Department>( ).Single( );
                 depo.Students = reader.Read<Student>( ).ToList( );
-                depo.Lectures = reader.Read<Lecture>( ).ToList( );                              
+                depo.Lectures = reader.Read<Lecture>( ).ToList( );
             }
 
             return depo;

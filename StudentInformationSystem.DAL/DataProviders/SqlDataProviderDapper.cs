@@ -8,8 +8,8 @@ namespace StudentInformationSystem.DAL.DataProviders
         private const string CONNECTION_STRING = @"Server=localhost\SQLEXPRESS;Database=StudentsInfoSystem-prod;Trusted_Connection=True;";
         private readonly SqlConnection _context = null!;
         private DepartmentsRepository _departmentRepository = null!;
-        private  LecturesRepository _lecturesRepository = null!;
-        private  StudentRepository _studentRepository = null!;
+        private LecturesRepository _lecturesRepository = null!;
+        private StudentRepository _studentRepository = null!;
         public SqlDataProviderDapper (bool inTestMode)
         {
             _context = new SqlConnection(CONNECTION_STRING);
@@ -33,7 +33,7 @@ namespace StudentInformationSystem.DAL.DataProviders
         {
             get
             {
-                if(_lecturesRepository == null)
+                if (_lecturesRepository == null)
                 {
                     _lecturesRepository = new(_context);
                 }
@@ -57,7 +57,7 @@ namespace StudentInformationSystem.DAL.DataProviders
 
         public void Save ( )
         {
-            throw new NotImplementedException( );
+         
         }
 
         #region Dispose methods

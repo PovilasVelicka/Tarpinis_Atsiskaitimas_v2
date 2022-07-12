@@ -90,7 +90,7 @@ namespace StudentInformationSystem.BLL
             var departmentEntity = (Department)_repository.Departments.GetById(department.Id);
             studentEntity.Lectures.Clear( );
 
-            studentEntity.Department = departmentEntity;            
+            studentEntity.Department = departmentEntity;
             studentEntity.Lectures.AddRange(departmentEntity.Lectures);
             _repository.Save( );
         }
@@ -136,8 +136,8 @@ namespace StudentInformationSystem.BLL
                     })
                 .ToList<ILectureDto>( );
         }
-        
-        
+
+
         public List<IStudentDto> GetStudents ( )
         {
             var result = _repository
@@ -152,7 +152,7 @@ namespace StudentInformationSystem.BLL
                     PersonalCode = x.PersonalCode,
                     DepartmentName = x.Department!.Name,
                     DepartmenCity = x.Department!.City,
-                }); ;
+                });
 
             return result.ToList<IStudentDto>( );
         }
@@ -250,20 +250,6 @@ namespace StudentInformationSystem.BLL
             };
         }
 
-        private IQueryable<IDepartmentDto> GetAllDepartments ( )
-        {
-            return
-             _repository
-             .Departments
-             .GetAll( )
-             .Select(d =>
-                 new DepartmentDto( )
-                 {
-                     Id = d.Id,
-                     Name = d.Name,
-                     City = d.City
-                 });
-        }
 
         public List<ILectureDto> GetLectures ( )
         {
@@ -291,5 +277,21 @@ namespace StudentInformationSystem.BLL
             })
             .ToList<ILectureDto>( );
         }
+
+        private IQueryable<IDepartmentDto> GetAllDepartments ( )
+        {
+            return
+             _repository
+             .Departments
+             .GetAll( )
+             .Select(d =>
+                 new DepartmentDto( )
+                 {
+                     Id = d.Id,
+                     Name = d.Name,
+                     City = d.City
+                 });
+        }
+
     }
 }

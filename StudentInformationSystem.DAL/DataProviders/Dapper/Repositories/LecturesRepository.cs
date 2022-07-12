@@ -3,7 +3,7 @@ using System.Data;
 using StudentInformationSystem.DAL.Models;
 namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
 {
-    internal class LecturesRepository : BaseRepository<Lecture>, ILectureRepository
+    internal  class LecturesRepository : BaseRepository<Lecture>, ILectureRepository
     {
         private const string SELECT_ALL = 
             @"  SELECT * FROM [InfoSystem].[Lectures] ";
@@ -38,7 +38,7 @@ namespace StudentInformationSystem.DAL.DataProviders.Dapper.Repositories
             @"  SELECT L.* FROM InfoSystem.Lectures L
                 INNER JOIN InfoSystem.DepartmentLecture DL ON L.Id = DL.DepartmentsId AND DL.DepartmentsId = @department_id";
 
-        protected LecturesRepository (IDbConnection dbConnection) : base(dbConnection)
+        public LecturesRepository (IDbConnection dbConnection) : base(dbConnection)
         {
         }
 
